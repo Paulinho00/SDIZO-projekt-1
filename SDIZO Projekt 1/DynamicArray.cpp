@@ -1,12 +1,8 @@
 #include "DynamicArray.h"
-using namespace std;
 
 void DynamicArray::handleMenu() {
-	cin.clear();
-	bool* shouldContinue= new bool;
-	*shouldContinue = true;
-	while (*shouldContinue) {
-		cout << "\nWybierz odpowiednia opcje:\n";
+	while (1) {
+		cout << "Wybierz odpowiednia opcje:\n";
 		cout << "1. Wczytaj dane z pliku\n";
 		cout << "2. Dodaj element na koncu tablicy\n";
 		cout << "3. Dodaj element na poczatku tablicy\n";
@@ -17,7 +13,6 @@ void DynamicArray::handleMenu() {
 		cout << "8. Wyswietl wszystkie elementy\n";
 		cout << "9. Wyswietl element na podanym indeksie\n";
 		cout << "10. Wyszukaj podana wartosc w tablicy\n";
-		cout << "11. Cofnij\n";
 
 		int* choice = new int;
 
@@ -33,15 +28,10 @@ void DynamicArray::handleMenu() {
 		case 8: break;
 		case 9: break;
 		case 10: break;
-		case 11: *shouldContinue = false; break;
-		default: {
-			cout << "Nie ma takiej opcji";
-			cin.clear();
-			cin.ignore(100, '\n');
-		} break;
+		default: cout << "Nie ma takiej opcji"; break;
 		}
 		delete choice;
-		
+		cin.clear();
+		cin.ignore(100, '\n');
 	}
-	delete shouldContinue;
 };
