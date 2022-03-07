@@ -1,4 +1,5 @@
 #include <iostream>
+#include "DynamicArray.h"
 using namespace std;
 
 //Funkcja wyswietlajaca menu
@@ -19,6 +20,10 @@ void readUserInput() {
 	cin >> * userInput;
 
 	switch (*userInput) {
+	case 1: {
+		DynamicArray dynamicArray;
+		dynamicArray.handleMenu();
+	} break;
 	case 6: exit(0);
 	default: cout << "Nie ma takiej oppcji\n"; break;
 	};
