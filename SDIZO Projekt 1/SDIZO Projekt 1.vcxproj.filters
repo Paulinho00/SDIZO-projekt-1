@@ -18,11 +18,5 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DynamicArray.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DynamicArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
