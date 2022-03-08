@@ -1,8 +1,10 @@
 #include <iostream>
+#include "DataStructures.cpp"
 using namespace std;
 
 //Wyswietlanie i zarzadzanie menu tablicy dynamicznej
 void dynamicArrayMenu() {
+	DynamicArray dynamicArray;
 	while (1) {
 		//Wyswietlenie opcji w menu
 		cout << "\nWybierz opcje:\n";
@@ -13,7 +15,7 @@ void dynamicArrayMenu() {
 		cout << "6. Usun element na wybranej pozycji\n";
 		cout << "7. Wyswietl wszystkie wartosci\n";
 		cout << "8. Znajdz wartosc w tablicy\n";
-		cout << "0. Cofnif do menu glownego\n";
+		cout << "0. Cofnij do menu glownego\n";
 		cout << "Podaj odpowiednia liczbe\n";
 
 		//Odczyt wyboru uzytkownika
@@ -22,6 +24,12 @@ void dynamicArrayMenu() {
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
+		case 2: {
+			cout << "Podaj wartosc ";
+			cin >> userInput;
+			dynamicArray.addElement(userInput);
+		}; break;
+		case 7: dynamicArray.showElements();
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};
