@@ -22,21 +22,56 @@ void dynamicArrayMenu() {
 		int userInput;
 		cin >> userInput;
 
+		//Wykrycie blednego typu wejscia
+		if (cin.fail()) {
+			cout << "Podales zla liczbe\n";
+			//Wyczyszczenie buforu
+			cin.clear();
+			cin.ignore(100, '\n');
+			continue;
+		}
+
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
 		case 2: {
 			cout << "Podaj wartosc ";
 			cin >> userInput;
+
+			//Wykrycie blednych danych
+			if (cin.fail()) {
+				cout << "Podales zle dane\n";
+				//Wyczyszczenie buforu
+				cin.clear();
+				cin.ignore(100, '\n');
+				break;
+			}
+
 			dynamicArray.addElement(userInput);
 		}; break;
-		case 7: dynamicArray.showElements();
+		case 3: {
+			int index;
+			cout << "Podaj wartosc ";
+			cin >> userInput;
+			cout << "Podaj indeks na ktory chcesz wstawic liczbe ";
+			cin >> index;
+
+			//Wykrycie blednych danych
+			if (cin.fail()) {
+				cout << "Podales zle dane\n";
+				//Wyczyszczenie buforu
+				cin.clear();
+				cin.ignore(100, '\n');
+				break;
+			}
+
+			dynamicArray.addElementAtIndex(index, userInput);
+		}; break;
+		case 7: dynamicArray.showElements(); break;
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};
 
-		//Wyczyszczenie buforu
-		cin.clear();
-		cin.ignore(100, '\n');
+
 	}
 }
 
@@ -53,9 +88,19 @@ void dataStructuresMenu() {
 		cout << "0. Zakoncz program\n";
 		cout << "Podaj odpowiednia liczbe: \n";
 		
+
 		//Odczyt wyboru uzytkownika
 		int userInput;
 		cin >> userInput;
+
+		//Wykrycie blednego typu wejscia
+		if (cin.fail()) {
+			cout << "Podales zla liczbe\n ";
+			//Wyczyszczenie buforu
+			cin.clear();
+			cin.ignore(100, '\n');
+			continue;
+		}
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
@@ -64,9 +109,6 @@ void dataStructuresMenu() {
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};
 
-		//Wyczyszczenie buforu
-		cin.clear();
-		cin.ignore(100, '\n');
 	}
 }
 
