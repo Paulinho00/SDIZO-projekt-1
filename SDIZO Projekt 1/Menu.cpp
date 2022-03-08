@@ -1,5 +1,5 @@
 #include <iostream>
-#include "DataStructures.cpp"
+#include "DataStructures.h"
 using namespace std;
 
 //Wyswietlanie i zarzadzanie menu tablicy dynamicznej
@@ -119,7 +119,7 @@ void dynamicArrayMenu() {
 				cin.ignore(100, '\n');
 				break;
 			}
-			dynamicArray.randomElements(userInput);
+			dynamicArray.fillArray(userInput);
 		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;
