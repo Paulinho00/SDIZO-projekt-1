@@ -90,6 +90,22 @@ void dynamicArrayMenu() {
 			dynamicArray.deleteElementAtIndex(userInput);
 		}; break;
 		case 6: dynamicArray.showElements(); break;
+		case 7: {
+			cout << "Podaj wartosc do wyszukania ";
+			cin >> userInput;
+
+			//Wykrycie blednych danych
+			if (cin.fail()) {
+				cout << "Podales zle dane \n";
+				//Wyczyszczenie buforu
+				cin.clear();
+				cin.ignore(100, '\n');
+				break;
+			}
+
+			dynamicArray.findElement(userInput);
+
+		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};

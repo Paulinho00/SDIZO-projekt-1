@@ -189,5 +189,26 @@ public:
 		}
 		cout << "\n";
 	}
+
+	//Wyszukiwanie indeksow na ktorym znajduje sie podana wartosc
+	void findElement(int value) {
+		//Zmienna przechowujaca informacje czy znaleziono taka wartosc
+		bool foundValues = false;
+
+		cout << "\nLiczby o zadanej wartosci znajduja sie na indeksach: ";
+
+		//Petla przeszukujaca
+		for (int i = 0; i < size; i++) {
+			if (array[i] == value) {
+				//Wyswietlenie odpowiedniego indeksu
+				cout << i << " ";
+				//Zapisanie informacji o znalezieniu wartosci
+				foundValues = true;
+			}
+		}
+		//Komunikat o braku takiej wartosci
+		if (!foundValues) cout << "Nie ma takiej wartosci ";
+		cout << "\n";
+	}
 };
 
