@@ -15,6 +15,7 @@ void dynamicArrayMenu() {
 		cout << "5. Usun element na wybranej pozycji\n";
 		cout << "6. Wyswietl wszystkie wartosci\n";
 		cout << "7. Znajdz wartosc w tablicy\n";
+		cout << "8. Wygeneruj wartosci losowe\n";
 		cout << "0. Cofnij do menu glownego\n";
 		cout << "Podaj odpowiednia liczbe\n";
 
@@ -105,6 +106,20 @@ void dynamicArrayMenu() {
 
 			dynamicArray.findElement(userInput);
 
+		}; break;
+		case 8: {
+			cout << "Podaj ilosc elementow ";
+			cin >> userInput;
+
+			//Wykrycie blednych danych
+			if (cin.fail()) {
+				cout << "Podales zle dane \n";
+				//Wyczyszczenie buforu
+				cin.clear();
+				cin.ignore(100, '\n');
+				break;
+			}
+			dynamicArray.randomElements(userInput);
 		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;

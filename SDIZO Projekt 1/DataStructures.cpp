@@ -1,6 +1,15 @@
 #include <iostream>
 #include <fstream>
+#include <time.h>
 using namespace std;
+
+//Losowanie losowej liczby int
+inline int randomValue(){
+	srand(time(NULL));
+	int range = 500 - 0 + 1;
+	int randonNumber = rand() % range - 250;
+	return randonNumber;
+}
 
 //Klasa reprezentujaca tablice dynamiczna
 class DynamicArray {
@@ -20,6 +29,9 @@ public:
 
 	//Odczytuje do tablicy, dane z pliku
 	void readFromFile(string filename) {
+		//Usuniecie struktury
+		
+		if(array != nullptr)delete[] array;
 		//Otwarcie pliku
 		fstream file;
 		file.open(filename, ios::in);
@@ -209,6 +221,16 @@ public:
 		//Komunikat o braku takiej wartosci
 		if (!foundValues) cout << "Nie ma takiej wartosci ";
 		cout << "\n";
+	}
+
+	//Generowanie okreslonej liczby wartosci w strukturze
+	void randomElements(int amount) {
+		if (array != nullptr) delete[] array;
+		array = new int[amount];
+		for (int i = 0; i < amount; i++) {
+			int value = randomValue();
+			array[i] = value;
+		}
 	}
 };
 
