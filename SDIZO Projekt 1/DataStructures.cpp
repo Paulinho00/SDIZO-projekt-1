@@ -17,7 +17,7 @@ public:
 		delete[] array;
 	}
 
-	//Dodawanie elementu na koncu tablicy
+	//Dodaje element na koncu tablicy
 	void addElement(int value) {
 		//Sprawdzenie czy tablica jest zainicjalizowana
 		if (array == nullptr) {
@@ -37,12 +37,12 @@ public:
 		}
 		buff[size-1] = value;
 		
-		//Zastapienie starej tablicy nowa, wieksza
+		//Zastapienie starej tablicy nowa
 		delete[] array;
 		array = buff;
 	}
 
-	//Dodawanie elementu na okreslonym indeksie
+	//Dodaje element do tablicy w okreslonym indeksie
 	void addElementAtIndex(int index, int value) {
 		//Sprawdzenie czy tablica jest zainicjalizowana
 		if (array == nullptr && index == 0) {
@@ -71,13 +71,43 @@ public:
 			buff[i] = array[i - 1];
 		}
 
-		//Usuniecie starej tablicy
+		//Zastapienie starej tablicy nowa
 		delete[] array;
-		//Ustawienie wskaznika na bufor jako nowa tablica
 		array = buff;
 	}
 
-	//Wyswietlanie tablicy
+	//Usuwa ostatni element w tablicy
+	void deleteElement() {
+		//Sprawdzenie czy tablica jest pusta
+		if (array == nullptr) {
+			cout << "Tablica jest pusta\n";
+			return;
+		}
+		//Sprawdzenie czy tablica ma tylko jeden element
+		if (size == 1) {
+			//Usuniecie tablicy
+			size--;
+			delete[] array;
+			array = nullptr;
+			return;
+		}
+
+		//Zmniejszenie rozmiaru i utworzenie buforu
+		size--;
+		int* buff = new int[size];
+
+		//Przepisanie tablicy bez ostatniego elementu
+		for (int i = 0; i < size; i++) {
+			buff[i] = array[i];
+		}
+
+		//Zastapienie starej tablicy nowa
+		delete[] array;
+		array = buff;
+
+	}
+
+	//Wyswietla zawartosc tablicy
 	void showElements() {
 		cout << "Wartosci: ";
 		for (int i = 0; i < size; i++) {
