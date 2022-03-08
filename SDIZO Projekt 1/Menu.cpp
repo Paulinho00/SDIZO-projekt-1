@@ -69,6 +69,20 @@ void dynamicArrayMenu() {
 		case 4: {
 			dynamicArray.deleteElement();
 		}; break;
+		case 5: {
+			cout << "Podaj indeks, z ktorego chcesz usunac wartosc ";
+			cin >> userInput;
+
+			//Wykrycie blednych danych
+			if (cin.fail()) {
+				cout << "Podales zle dane\n";
+				//Wyczyszczenie buforu
+				cin.clear();
+				cin.ignore(100, '\n');
+				break;
+			}
+			dynamicArray.deleteElementAtIndex(userInput);
+		}; break;
 		case 6: dynamicArray.showElements(); break;
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;

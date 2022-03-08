@@ -107,6 +107,37 @@ public:
 
 	}
 
+	//Usuwa element na podanym indeksie
+	void deleteElementAtIndex(int index) {
+		//Sprawdzenie czy tablica jest pusta
+		if (array == nullptr) {
+			cout << "Tablica jest pusta\n";
+			return;
+		}
+		//Sprawdzenie czy wybrany indeks jest poprawny
+		if (index >= size || index < 0) {
+			cout << "Nie ma takiego indeksu w tablicy\n\n";
+			return;
+		}
+
+		//Zmniejszenie rozmiaru i utworzenie buforu
+		size--;
+		int* buff = new int[size];
+
+		//Przepisanie tablicy bez usuwanego elementu
+		for (int i = 0; i < index; i++) {
+			buff[i] = array[i];
+		}
+		for (int i = index; i < size; i++) {
+			buff[i] = array[i + 1];
+		}
+
+		//Zastapienie starej tablicy nowa
+		delete[] array;
+		array = buff;
+
+	}
+
 	//Wyswietla zawartosc tablicy
 	void showElements() {
 		cout << "Wartosci: ";
