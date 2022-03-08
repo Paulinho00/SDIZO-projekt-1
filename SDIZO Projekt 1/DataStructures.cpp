@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 //Klasa reprezentujaca tablice dynamiczna
@@ -15,6 +16,48 @@ public:
 	}
 	~DynamicArray() {
 		delete[] array;
+	}
+
+	//Odczytuje do tablicy, dane z pliku
+	void readFromFile(string filename) {
+		//Otwarcie pliku
+		fstream file;
+		file.open(filename, ios::in);
+		//Sprawdzenie poprawnosci otwarcia
+		if (file.is_open()) {
+
+			//Odczyt rozmiaru danych zawartych w pliku
+			int size;
+			file >> size;
+
+			//Sprawdzenie poprawnosci odczytu rozmiaru danych
+			if (file.fail()) {
+				cout << "Blad odczytu dlugosci pliku";
+			}
+			else {
+				
+				//Odczyt wszystkich danych z pliku
+				for (int i = 0; i < size; i++) {
+					int value;
+					file >> value;
+					//Sprawdzanie czy ka¿dy element zostal poprawnie odczytany
+					if (file.fail()) {
+						cout << "Blad odczytu danych";
+					}
+					else {
+						//Dodanie danej do tablicy
+						addElement(value);
+					}
+					//Zamkniêcie pliku
+					
+				}
+				file.close();
+			}
+
+		}
+		else {
+			cout << "Blad otwarcia pliku\n";
+		}
 	}
 
 	//Dodaje element na koncu tablicy
@@ -147,3 +190,4 @@ public:
 		cout << "\n";
 	}
 };
+
