@@ -193,11 +193,21 @@ void DynamicArray::deleteElementAtIndex(int index) {
 
 //Wyswietla zawartosc tablicy
 void DynamicArray::showElements() {
+
+	//Wypisywanie tablicy
 	cout << "Wartosci: ";
 	for (int i = 0; i < size; i++) {
 		cout << array[i] << ", ";
 	}
 	cout << "\n";
+	
+	//Wypisywanie w odwrotnej kolejnosci
+	cout << "Odwrocona kolejnosc: ";
+	for (int i = size - 1; i >= 0; i--) {
+		cout << array[i] << ", ";
+	}
+	cout << "\n";
+
 }
 
 //Wyszukiwanie indeksow na ktorym znajduje sie podana wartosc

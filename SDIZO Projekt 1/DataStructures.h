@@ -36,3 +36,7 @@ public:
 	//Generowanie okreslonej liczby wartosci w strukturze
 	void fillArray(int amount);
 };
+
+class DoubleLinkedList {
+	
+};
