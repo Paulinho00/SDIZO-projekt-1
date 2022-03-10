@@ -167,14 +167,15 @@ void DynamicArray::deleteElement() {
 
 //Usuwa element na podanym indeksie
 void DynamicArray::deleteElementAtIndex(int index) {
-	//Sprawdzenie czy tablica jest pusta
-	if (array == nullptr) {
-		cout << "Tablica jest pusta\n";
-		return;
-	}
 	//Sprawdzenie czy wybrany indeks jest poprawny
 	if (index >= size || index < 0) {
 		cout << "Nie ma takiego indeksu w tablicy\n\n";
+		return;
+	}
+
+	//Sprawdzenie czy tablica jest pusta
+	if (array == nullptr) {
+		cout << "Tablica jest pusta\n";
 		return;
 	}
 
@@ -257,6 +258,9 @@ void DynamicArray::fillArray(int amount) {
 	}
 }
 
+
+
+
 Node::Node(int value) {
 	this->value = value;
 	previous = nullptr;
@@ -274,8 +278,6 @@ Node::~Node() {
 	next = nullptr;
 }
 
-
-
 DoubleLinkedList::DoubleLinkedList() {
 	head = nullptr;
 	tail = nullptr;
@@ -283,6 +285,28 @@ DoubleLinkedList::DoubleLinkedList() {
 }
 
 DoubleLinkedList::~DoubleLinkedList() {
+	if (head != nullptr) {
+		size = 0;
+		bool shouldContinue = true;
+		Node* currentNode;
+		Node* nextNode = head;
+		//Usuniecie wszystkich elementow
+		while (shouldContinue) {
+			currentNode = nextNode;
+			if (currentNode->next == nullptr) {
+				shouldContinue = false;
+			}
+			else {
+				nextNode = currentNode->next;
+			}
+			delete currentNode;
+		}
+	}
+}
+
+//Odczytuje do tablicy, dane z pliku
+void DoubleLinkedList::readFromFile(std::string filename) {
+	//Usuniecie struktury
 	if (head != nullptr) {
 		size = 0;
 		bool shouldContinue = true;
@@ -393,6 +417,56 @@ void DoubleLinkedList::deleteElement(){
 	Node* penultimateElement = elementToDelete->previous;
 	penultimateElement->next = nullptr;
 	delete elementToDelete;
+	size--;
+}
+
+//Usuwa element na podanym indeksie
+void DoubleLinkedList::deleteElementAtPosition(int position) {
+	//Sprawdzenie czy dodanie elementu na tej pozycji jest mozliwe
+	if (position >= size || position < 0) {
+		cout << "Nie ma takiej pozycji w liscie\n";
+		return;
+	}
+
+	//Sprawdzenie czy lista nie jest pusta
+	if (head == nullptr) {
+		cout << "Lista jest pusta\n";
+		return;
+	}
+
+	//Sprawdzenie czy usuwany element jest ostatnim w liscie
+	if (position == size - 1) {
+		deleteElement();
+		return;
+	}
+
+	//Sprawdzenie czy usuwany element jest na poczatku listy
+	if (position == 0) {
+		//Odczyt pierwszego i drugiego elementu z listy
+		Node* elementToDelete = head;
+		Node* secondElement = elementToDelete->next;
+
+		//Usuniecie wskaznika na poprzedni element w drugim elemencie listy
+		secondElement->previous = nullptr;
+		//Ustawienie glowy listy
+		head = secondElement;
+		//Usuniecie elementu
+		delete elementToDelete;
+		size--;
+		return;
+	}
+
+	//Wyszukanie elementu do usuniêca
+	Node* currentNode = head;
+	for (int i = 0; i < position; i++) {
+		currentNode = currentNode->next;
+	}
+
+	//Usuniecie elementu
+	Node* previousElement = currentNode->previous;
+	previousElement->next = currentNode->next;
+	currentNode->next->previous = previousElement;
+	delete currentNode;
 	size--;
 }
 

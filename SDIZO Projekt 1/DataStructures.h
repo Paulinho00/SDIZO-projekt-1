@@ -78,7 +78,7 @@ public:
 	void deleteElement();
 
 	//Usuwa element na podanym indeksie
-	void deleteElementAtPosition(int Position);
+	void deleteElementAtPosition(int position);
 
 	//Wyswietla zawartosc tablicy
 	void showElements();

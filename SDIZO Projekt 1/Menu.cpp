@@ -186,6 +186,15 @@ void doubleLinkedListMenu() {
 		case 4: {
 			doubleLinkedList.deleteElement();
 		}; break;
+		case 5: {
+			cout << "Podaj pozycje usuwanego elementu ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			doubleLinkedList.deleteElementAtPosition(userInput);
+		}; break;
 		case 6: {
 			doubleLinkedList.showElements();
 		}; break;
