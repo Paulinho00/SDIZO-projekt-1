@@ -183,6 +183,9 @@ void doubleLinkedListMenu() {
 			
 			doubleLinkedList.addElementAtPosition(position, userInput);
 		}
+		case 4: {
+			doubleLinkedList.deleteElement();
+		}; break;
 		case 6: {
 			doubleLinkedList.showElements();
 		}; break;

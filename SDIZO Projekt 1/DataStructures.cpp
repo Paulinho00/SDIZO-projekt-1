@@ -330,25 +330,14 @@ void DoubleLinkedList::addElement(int value) {
 
 //Dodaje element do tablicy w okreslonym indeksie
 void DoubleLinkedList::addElementAtPosition(int position, int value) {
-	//Sprawdzenie czy tablica jest zainicjalizowana
-	if (head == nullptr && position == 0) {
-		//Inicjalizacja listy
-		Node* newNode = new Node(value);
-		head = newNode;
-		tail = newNode;
-		size++;
-		return;
+	//Sprawdzenie czy tablica jest zainicjalizowana lub czy element ma zostac dodany na koncu
+	if ((head == nullptr && position == 0) || position == size) {
+		addElement(value);
 	}
 
 	//Sprawdzenie czy dodanie elementu na tej pozycji jest mozliwe
 	if (position > size || position < 0) {
 		cout << "Dodanie elementu na tej pozycji nie jest mozliwe\n";
-		return;
-	}
-
-	//Sprawdzenie czy element ma zostac dodany na koncu
-	if (position == size) {
-		addElement(value);
 		return;
 	}
 
@@ -378,6 +367,33 @@ void DoubleLinkedList::addElementAtPosition(int position, int value) {
 	elementAfterNewElement->previous = newElement;
 	currentNode->next = newElement;
 	size++;
+}
+
+//Usuwa ostatni element w tablicy
+void DoubleLinkedList::deleteElement(){
+	//Sprawdzenie czy lista nie jest pusta
+	if (head == nullptr) {
+		cout << "Lista jest pusta\n";
+		return;
+	}
+
+	//Sprawdzenie czy jest to jedyny element na liscie
+	if (size == 1) {
+		//Usuniecie jedynego elementu
+		tail = nullptr;
+		delete head;
+		head = nullptr;
+		size--;
+		return;
+	}
+
+	//Usuniecie elementu
+	Node* elementToDelete = tail;
+	tail = elementToDelete->previous;
+	Node* penultimateElement = elementToDelete->previous;
+	penultimateElement->next = nullptr;
+	delete elementToDelete;
+	size--;
 }
 
 //Wyswietla zawartosc tablicy
