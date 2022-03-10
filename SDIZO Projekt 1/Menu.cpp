@@ -129,6 +129,43 @@ void dynamicArrayMenu() {
 	}
 }
 
+//Wyswietlenie i zarzadzanie menu dla listy dwukierunkowej
+void doubleLinkedListMenu() {
+	while (1) {
+		//Wyswietlenie opcji w menu
+		cout << "\nWybierz opcje:\n";
+		cout << "1. Odczytaj dane z pliku\n";
+		cout << "2. Dodaj element na koncu listy\n";
+		cout << "3. Dodaj element na wybranej pozycji\n";
+		cout << "4. Usun element na koncu listy\n";
+		cout << "5. Usun element na wybranej pozycji\n";
+		cout << "6. Wyswietl wszystkie wartosci\n";
+		cout << "7. Znajdz wartosc w liscie\n";
+		cout << "8. Wygeneruj wartosci losowe\n";
+		cout << "0. Cofnij do menu glownego\n";
+		cout << "Podaj odpowiednia liczbe\n";
+
+		//Odczyt wyboru uzytkownika
+		int userInput;
+		cin >> userInput;
+
+		//Wykrycie blednego typu wejscia
+		if (cin.fail()) {
+			cout << "Podales zla liczbe\n";
+			//Wyczyszczenie buforu
+			cin.clear();
+			cin.ignore(100, '\n');
+			continue;
+		}
+
+		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
+		switch (userInput) {
+		case 0: return;
+		default: cout << "Nie ma takiej oppcji\n"; break;
+		};
+	}
+}
+
 //Funkcja wyswietlajaca menu i zarzadzajaca wyborem uzytkownika
 void dataStructuresMenu() {
 	while (1) {
@@ -159,6 +196,7 @@ void dataStructuresMenu() {
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
 		case 1: dynamicArrayMenu(); break;
+		case 2: doubleLinkedListMenu(); break;
 		case 0: exit(0);
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};
