@@ -25,7 +25,6 @@ DynamicArray::~DynamicArray() {
 //Odczytuje do tablicy, dane z pliku
 void DynamicArray::readFromFile(string filename) {
 	//Usuniecie struktury
-
 	if (array != nullptr) {
 		delete[] array;
 		size = 0;
@@ -108,6 +107,12 @@ void DynamicArray::addElementAtIndex(int index, int value) {
 	//Sprawdzenie czy wybrany indeks jest poprawny
 	if (index > size || index < 0) {
 		cout << "Nie ma takiego indeksu w tablicy\n\n";
+		return;
+	}
+
+	//Sprawdzenie czy element ma zostac dodany na koncu
+	if (index == size) {
+		addElement(value);
 		return;
 	}
 
@@ -258,19 +263,28 @@ Node::Node(int value) {
 	next = nullptr;
 }
 
+Node::Node(int value, Node* next, Node* previous) {
+	this->value = value;
+	this->previous = previous;
+	this->next = next;
+}
+
 Node::~Node() {
 	previous = nullptr;
 	next = nullptr;
 }
 
 
+
 DoubleLinkedList::DoubleLinkedList() {
 	head = nullptr;
 	tail = nullptr;
+	size = 0;
 }
 
 DoubleLinkedList::~DoubleLinkedList() {
 	if (head != nullptr) {
+		size = 0;
 		bool shouldContinue = true;
 		Node* currentNode;
 		Node* nextNode = head;
@@ -296,6 +310,7 @@ void DoubleLinkedList::addElement(int value) {
 		Node* newNode = new Node(value);
 		head = newNode;
 		tail = newNode;
+		size++;
 		return;
 	}
 	
@@ -306,10 +321,63 @@ void DoubleLinkedList::addElement(int value) {
 	Node* newElement = new Node(value);
 	lastElement->next = newElement;
 	newElement->previous = lastElement;
+	size++;
 	
 	//Zmiana ogona listy
 	tail = newElement;
 	
+}
+
+//Dodaje element do tablicy w okreslonym indeksie
+void DoubleLinkedList::addElementAtPosition(int position, int value) {
+	//Sprawdzenie czy tablica jest zainicjalizowana
+	if (head == nullptr && position == 0) {
+		//Inicjalizacja listy
+		Node* newNode = new Node(value);
+		head = newNode;
+		tail = newNode;
+		size++;
+		return;
+	}
+
+	//Sprawdzenie czy dodanie elementu na tej pozycji jest mozliwe
+	if (position > size || position < 0) {
+		cout << "Dodanie elementu na tej pozycji nie jest mozliwe\n";
+		return;
+	}
+
+	//Sprawdzenie czy element ma zostac dodany na koncu
+	if (position == size) {
+		addElement(value);
+		return;
+	}
+
+	//Sprawdzenie czy element ma zostac dodany na poczatku
+	if (position == 0) {
+		//Inicjalizacja nowego elementu
+		Node* newElement = new Node(value);
+		newElement->next = head;
+		size++;
+		
+		//Zmiana glowy listy
+		head->previous = newElement;
+		head = newElement;
+		return;
+	}
+	
+	Node* currentNode = head;
+	//Odczyt elementu, ktory ma byc przed nowym elementem
+	for (int i = 0; i < position-1; i++) {
+		currentNode = currentNode->next;
+	}
+
+	//Utworzenie i inicjalizacja nowego elementu
+	Node* newElement = new Node(value, currentNode->next, currentNode);
+	//Zmiana wskaznikow w poprzedzajacym i nastepujacym elemencie
+	Node* elementAfterNewElement = currentNode->next;
+	elementAfterNewElement->previous = newElement;
+	currentNode->next = newElement;
+	size++;
 }
 
 //Wyswietla zawartosc tablicy
@@ -353,6 +421,8 @@ void DoubleLinkedList::showElements() {
 			currentNode = currentNode->previous;
 		}
 	}
+	cout << "\n";
 }
+
 
 

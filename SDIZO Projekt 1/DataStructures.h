@@ -47,6 +47,7 @@ struct Node {
 	int value;
 
 	Node(int value);
+	Node(int value, Node* next, Node* previous);
 	~Node();
 
 };
@@ -58,6 +59,8 @@ private:
 	Node* head;
 	//Wskaünik na ostatni element listy
 	Node* tail;
+	//Rozmiar listy
+	int size;
 public:
 	DoubleLinkedList();
 	~DoubleLinkedList();

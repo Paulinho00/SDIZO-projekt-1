@@ -165,9 +165,27 @@ void doubleLinkedListMenu() {
 			}
 			doubleLinkedList.addElement(userInput);
 		}; break;
+		case 3: {
+			cout << "Podaj wartosc ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+
+			int position;
+			cout << "Podaj pozycje na ktorej chcesz dodac element ";
+			//Odczyt wyboru uzytkownika
+			position= readUserInput();
+			if (position == -1) {
+				break;
+			}
+			
+			doubleLinkedList.addElementAtPosition(position, userInput);
+		}
 		case 6: {
 			doubleLinkedList.showElements();
-		}
+		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};
