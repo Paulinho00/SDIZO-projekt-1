@@ -37,6 +37,52 @@ public:
 	void fillArray(int amount);
 };
 
+//Element w tablicy
+struct Node {
+	//Wskaünik na poprzedni element
+	Node* previous;
+	//Wskaünik na nastepny element
+	Node* next;
+	//Przechowywana wartoúÊ
+	int value;
+
+	Node(int value);
+	~Node();
+
+};
+
+//Klasa reprezentujaca liste dwukierunkowa
 class DoubleLinkedList {
-	
+private:
+	//Wskaünik na pierwszy element listy
+	Node* head;
+	//Wskaünik na ostatni element listy
+	Node* tail;
+public:
+	DoubleLinkedList();
+	~DoubleLinkedList();
+
+	//Odczytuje do tablicy, dane z pliku
+	void readFromFile(std::string filename);
+
+	//Dodaje element na koncu tablicy
+	void addElement(int value);
+
+	//Dodaje element do tablicy w okreslonym indeksie
+	void addElementAtPosition(int position, int value);
+
+	//Usuwa ostatni element w tablicy
+	void deleteElement();
+
+	//Usuwa element na podanym indeksie
+	void deleteElementAtPosition(int Position);
+
+	//Wyswietla zawartosc tablicy
+	void showElements();
+
+	//Wyszukiwanie indeksow na ktorym znajduje sie podana wartosc
+	void findElement(int value);
+
+	//Generowanie okreslonej liczby wartosci w strukturze
+	void fillList(int amount);
 };

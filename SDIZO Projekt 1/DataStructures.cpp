@@ -252,4 +252,107 @@ void DynamicArray::fillArray(int amount) {
 	}
 }
 
+Node::Node(int value) {
+	this->value = value;
+	previous = nullptr;
+	next = nullptr;
+}
+
+Node::~Node() {
+	previous = nullptr;
+	next = nullptr;
+}
+
+
+DoubleLinkedList::DoubleLinkedList() {
+	head = nullptr;
+	tail = nullptr;
+}
+
+DoubleLinkedList::~DoubleLinkedList() {
+	if (head != nullptr) {
+		bool shouldContinue = true;
+		Node* currentNode;
+		Node* nextNode = head;
+		//Usuniecie wszystkich elementow
+		while (shouldContinue) {
+			currentNode = nextNode;
+			if (currentNode->next == nullptr) {
+				shouldContinue = false;
+			}
+			else {
+				nextNode = currentNode->next;
+			}
+			delete currentNode;
+		}
+	}
+}
+
+//Dodaje element na koncu tablicy
+void DoubleLinkedList::addElement(int value) {
+	//Sprawdzenie czy lista jest zainicjalizowana
+	if (head == nullptr) {
+		//Inicjalizacja listy
+		Node* newNode = new Node(value);
+		head = newNode;
+		tail = newNode;
+		return;
+	}
+	
+	//Odczyt ostatniego elementu
+	Node* lastElement = tail;
+
+	//Zainicjowanie nowego elementu
+	Node* newElement = new Node(value);
+	lastElement->next = newElement;
+	newElement->previous = lastElement;
+	
+	//Zmiana ogona listy
+	tail = newElement;
+	
+}
+
+//Wyswietla zawartosc tablicy
+void DoubleLinkedList::showElements() {
+	//Sprawdzenie czy lista nie jest pusta
+	if (head == nullptr) {
+		cout << "Lista jest pusta\n";
+		return;
+	}
+
+	//Wypisywanie listy
+	cout << "Wartosci: ";
+	bool hasNextElement = true;
+	Node* currentNode = head;
+	while (hasNextElement) {
+		cout << currentNode->value << ", ";
+
+		//Sprawdzenie czy istnieje nastepny element na liscie
+		if (currentNode->next == nullptr) {
+			hasNextElement = false;
+		}
+		else {
+			//Odczyt nastepnego elementu
+			currentNode = currentNode->next;
+		}
+	}
+
+	//Wypisywanie listy w odwrotnej kolejnosci
+	cout << "\nWartosc w odwrotnej kolejnosc: ";
+	hasNextElement = true;
+	currentNode = tail;
+	while (hasNextElement) {
+		cout << currentNode->value << ", ";
+
+		//Sprawdzenie czy doszlismy do pierwszego elementu listy
+		if (currentNode->previous == nullptr) {
+			hasNextElement = false;
+		}
+		else {
+			//Odczyt kolejnego elementu
+			currentNode = currentNode->previous;
+		}
+	}
+}
+
 

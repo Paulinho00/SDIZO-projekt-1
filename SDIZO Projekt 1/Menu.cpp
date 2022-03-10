@@ -2,6 +2,25 @@
 #include "DataStructures.h"
 using namespace std;
 
+//Funkcja odczytujaca i sprawdzajaca dane wprowadzone przez uzytkownika
+int readUserInput() {
+	//Odczyt wyboru uzytkownika
+	int userInput;
+	cin >> userInput;
+
+	//Wykrycie blednego typu wejscia
+	if (cin.fail()) {
+		cout << "Podales zla liczbe\n";
+		//Wyczyszczenie buforu
+		cin.clear();
+		cin.ignore(100, '\n');
+		return -1;
+	}
+	else {
+		return userInput;
+	}
+}
+
 //Wyswietlanie i zarzadzanie menu tablicy dynamicznej
 void dynamicArrayMenu() {
 	DynamicArray dynamicArray;
@@ -21,16 +40,11 @@ void dynamicArrayMenu() {
 
 		//Odczyt wyboru uzytkownika
 		int userInput;
-		cin >> userInput;
-
-		//Wykrycie blednego typu wejscia
-		if (cin.fail()) {
-			cout << "Podales zla liczbe\n";
-			//Wyczyszczenie buforu
-			cin.clear();
-			cin.ignore(100, '\n');
+		userInput = readUserInput();
+		if (userInput == -1) {
 			continue;
 		}
+
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
@@ -42,32 +56,29 @@ void dynamicArrayMenu() {
 		}; break;
 		case 2: {
 			cout << "Podaj wartosc ";
-			cin >> userInput;
-
-			//Wykrycie blednych danych
-			if (cin.fail()) {
-				cout << "Podales zle dane\n";
-				//Wyczyszczenie buforu
-				cin.clear();
-				cin.ignore(100, '\n');
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
 				break;
 			}
 
 			dynamicArray.addElement(userInput);
 		}; break;
 		case 3: {
-			int index;
-			cout << "Podaj wartosc ";
-			cin >> userInput;
-			cout << "Podaj indeks na ktory chcesz wstawic liczbe ";
-			cin >> index;
+			
 
-			//Wykrycie blednych danych
-			if (cin.fail()) {
-				cout << "Podales zle dane\n";
-				//Wyczyszczenie buforu
-				cin.clear();
-				cin.ignore(100, '\n');
+			cout << "Podaj wartosc ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+
+			int index;
+			cout << "Podaj indeks na ktory chcesz wstawic liczbe ";
+			//Odczyt wyboru uzytkownika
+			index = readUserInput();
+			if (index == -1) {
 				break;
 			}
 
@@ -78,14 +89,9 @@ void dynamicArrayMenu() {
 		}; break;
 		case 5: {
 			cout << "Podaj indeks, z ktorego chcesz usunac wartosc ";
-			cin >> userInput;
-
-			//Wykrycie blednych danych
-			if (cin.fail()) {
-				cout << "Podales zle dane\n";
-				//Wyczyszczenie buforu
-				cin.clear();
-				cin.ignore(100, '\n');
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
 				break;
 			}
 			dynamicArray.deleteElementAtIndex(userInput);
@@ -93,14 +99,9 @@ void dynamicArrayMenu() {
 		case 6: dynamicArray.showElements(); break;
 		case 7: {
 			cout << "Podaj wartosc do wyszukania ";
-			cin >> userInput;
-
-			//Wykrycie blednych danych
-			if (cin.fail()) {
-				cout << "Podales zle dane \n";
-				//Wyczyszczenie buforu
-				cin.clear();
-				cin.ignore(100, '\n');
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
 				break;
 			}
 
@@ -109,16 +110,16 @@ void dynamicArrayMenu() {
 		}; break;
 		case 8: {
 			cout << "Podaj ilosc elementow ";
-			cin >> userInput;
-
-			//Wykrycie blednych danych
-			if (cin.fail()) {
-				cout << "Podales zle dane \n";
-				//Wyczyszczenie buforu
-				cin.clear();
-				cin.ignore(100, '\n');
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
 				break;
 			}
+			if (userInput <= 0) {
+				cout << "Nieprawidlowa ilosc\n";
+				break;
+			}
+
 			dynamicArray.fillArray(userInput);
 		}; break;
 		case 0: return;
@@ -131,6 +132,7 @@ void dynamicArrayMenu() {
 
 //Wyswietlenie i zarzadzanie menu dla listy dwukierunkowej
 void doubleLinkedListMenu() {
+	DoubleLinkedList doubleLinkedList;
 	while (1) {
 		//Wyswietlenie opcji w menu
 		cout << "\nWybierz opcje:\n";
@@ -147,19 +149,25 @@ void doubleLinkedListMenu() {
 
 		//Odczyt wyboru uzytkownika
 		int userInput;
-		cin >> userInput;
-
-		//Wykrycie blednego typu wejscia
-		if (cin.fail()) {
-			cout << "Podales zla liczbe\n";
-			//Wyczyszczenie buforu
-			cin.clear();
-			cin.ignore(100, '\n');
+		userInput = readUserInput();
+		if (userInput == -1) {
 			continue;
 		}
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
+		case 2: {
+			cout << "Podaj wartosc ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			doubleLinkedList.addElement(userInput);
+		}; break;
+		case 6: {
+			doubleLinkedList.showElements();
+		}
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};
@@ -182,14 +190,8 @@ void dataStructuresMenu() {
 
 		//Odczyt wyboru uzytkownika
 		int userInput;
-		cin >> userInput;
-
-		//Wykrycie blednego typu wejscia
-		if (cin.fail()) {
-			cout << "Podales zla liczbe\n ";
-			//Wyczyszczenie buforu
-			cin.clear();
-			cin.ignore(100, '\n');
+		userInput = readUserInput();
+		if (userInput == -1) {
 			continue;
 		}
 
