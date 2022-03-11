@@ -308,23 +308,8 @@ DoubleLinkedList::~DoubleLinkedList() {
 //Odczytuje do tablicy, dane z pliku
 void DoubleLinkedList::readFromFile(std::string filename) {
 	//Usuniecie struktury
-	if (head != nullptr) {
-		size = 0;
-		bool shouldContinue = true;
-		Node* currentNode;
-		Node* nextNode = head;
-		//Usuniecie wszystkich elementow
-		while (shouldContinue) {
-			currentNode = nextNode;
-			if (currentNode->next == nullptr) {
-				shouldContinue = false;
-			}
-			else {
-				nextNode = currentNode->next;
-			}
-		}
-		head = nullptr;
-		tail = nullptr;
+	while (head != nullptr) {
+		deleteElement();
 	}
 		//Otwarcie pliku
 		fstream file;
@@ -573,6 +558,21 @@ void DoubleLinkedList::findElement(int value) {
 		}
 		element = element->next;
 		position++;
+	}
+}
+
+
+//Generowanie okreslonej liczby wartosci w strukturze
+void DoubleLinkedList::fillList(int amount) {
+	//Usuniecie struktury
+	while (head != nullptr) {
+		deleteElement();
+	}
+
+	//Wypelnienie listy
+	for (int i = 0; i < amount; i++) {
+		int newValue = randomValue();
+		addElement(newValue);
 	}
 }
 

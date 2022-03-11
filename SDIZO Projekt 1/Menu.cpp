@@ -214,6 +214,20 @@ void doubleLinkedListMenu() {
 
 			doubleLinkedList.findElement(userInput);
 		}; break;
+		case 8: {
+			cout << "Podaj ilosc elementow ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			if (userInput <= 0) {
+				cout << "Nieprawidlowa ilosc\n";
+				break;
+			}
+
+			doubleLinkedList.fillList(userInput);
+		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};
