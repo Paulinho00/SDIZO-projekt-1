@@ -139,7 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DataStructures.cpp" />
+    <ClCompile Include="DynamicArray.cpp" />
+    <ClCompile Include="DoubleLinkedList.cpp" />
     <ClCompile Include="Menu.cpp" />
   </ItemGroup>
   <ItemGroup>

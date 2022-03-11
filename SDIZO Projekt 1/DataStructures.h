@@ -1,5 +1,14 @@
 #include <iostream>
+#include <random>
+using namespace std;
 
+//Losowanie losowej liczby int
+inline int randomValue() {
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<> dist(-250, 250);
+	return dist(gen);
+}
 //Klasa reprezentujaca tablice dynamiczna
 class DynamicArray {
 private:
