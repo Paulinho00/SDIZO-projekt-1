@@ -1,16 +1,16 @@
 #include <iostream>
 #include <fstream>
 #include <time.h>
+#include <random>
 #include "DataStructures.h"
 using namespace std;
 
 //Losowanie losowej liczby int
 int randomValue() {
-	//Zakres losowania
-	int range = 500 - 0 + 1;
-	//Losowanie liczby
-	int randonNumber = rand() % range - 250;
-	return randonNumber;
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<> dist(-250, 250);
+	return dist(gen);
 }
 
 
@@ -245,8 +245,6 @@ void DynamicArray::fillArray(int amount) {
 		size = 0;
 	}
 
-	//Wygenerowanie seeda do losowania
-	srand(time(NULL));
 	//Alokacja nowej tablicy
 	array = new int[amount];
 
