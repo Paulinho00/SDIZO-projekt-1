@@ -204,6 +204,16 @@ void doubleLinkedListMenu() {
 		case 6: {
 			doubleLinkedList.showElements();
 		}; break;
+		case 7: {
+			cout << "Podaj wartosc do wyszukania ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+
+			doubleLinkedList.findElement(userInput);
+		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej oppcji\n"; break;
 		};

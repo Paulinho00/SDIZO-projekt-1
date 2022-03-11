@@ -558,5 +558,25 @@ void DoubleLinkedList::showElements() {
 	cout << "\n";
 }
 
+//Wyszukiwanie indeksow na ktorym znajduje sie podana wartosc
+void DoubleLinkedList::findElement(int value) {
+	//Sprawdzenie czy lista jest pusta
+	if (head == nullptr) {
+		cout << "Tablica jest pusta\n";
+		return;
+	}
+
+	cout << "\nLiczby o zadanej wartosci znajduja sie na indeksach: ";
+	int position = 0;
+	Node* element = head;
+	while(element != nullptr) {
+		if (element->value == value) {
+			cout << position << ", ";
+		}
+		element = element->next;
+		position++;
+	}
+}
+
 
 
