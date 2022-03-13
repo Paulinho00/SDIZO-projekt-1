@@ -149,6 +149,38 @@ void BinaryHeap::showElements() {
 	print("", false, 0);
 }
 
+//Wyszukuje elementy w drzewie
+void BinaryHeap::findElement(int value) {
+	//Zmienna przechowujaca informacje czy znaleziono taka wartosc
+	bool foundValues = false;
+
+	//Petla przeszukujaca
+	for (int i = 0; i < dynArray->getSize(); i++) {
+		if ((dynArray->getArray())[i] == value) {
+			//Wyswietlenie odpowiedniego komunikatu
+			cout <<" Element o wartosci: " << value << "\n";
+			//Wyswietlenie informacji o rodzicu
+			cout << "   Rodzic: ";
+			if (i != 0) cout << (dynArray->getArray())[(i - 1) / 2] << "\n";
+			else cout << "Brak\n";
+			//Wyswietlenie informacji o lewym nastepniku
+			cout << "   Lewy nastepnik: ";
+			if ((2 * i + 1) < dynArray->getSize()) cout << (dynArray->getArray())[2 * i + 1] << "\n";
+			else cout << "Brak\n";
+			//Wyswietleie informacji o prawym nastepniku
+			cout << "   Prawy nastepnik: ";
+			if ((2 * i + 2) < dynArray->getSize()) cout << (dynArray->getArray())[2 * i + 2] << "\n";
+			else cout << "Brak\n";
+			cout << "\n";
+			//Zapisanie informacji o znalezieniu wartosci
+			foundValues = true;
+		}
+	}
+	//Komunikat o braku takiej wartosci
+	if (!foundValues) cout << "Nie ma takiej wartosci ";
+	cout << "\n";
+}
+
 //Funkcja wypisujaca dzieci danego elementu
 void BinaryHeap::print(string prefix, bool isLeft, int index) {
 	if (index < dynArray->getSize()) {

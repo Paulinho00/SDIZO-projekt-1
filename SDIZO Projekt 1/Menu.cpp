@@ -279,6 +279,15 @@ void binaryHeapMenu() {
 		case 4: {
 			binaryHeap.showElements();
 		}; break;
+		case 5: {
+			cout << "Podaj pozycje usuwanego elementu ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			binaryHeap.findElement(userInput);
+		}; break;
 		case 0: return;
 		}
 	}
