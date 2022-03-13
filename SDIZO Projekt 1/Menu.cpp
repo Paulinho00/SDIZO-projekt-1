@@ -258,6 +258,18 @@ void binaryHeapMenu() {
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
+		case 2: {
+			cout << "Podaj wartosc ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			binaryHeap.addElement(userInput);
+		}; break;
+		case 6: {
+			binaryHeap.showElements();
+		}; break;
 		case 0: return;
 		}
 	}

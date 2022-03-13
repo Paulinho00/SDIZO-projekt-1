@@ -133,9 +133,9 @@ public:
 	void fillList(int amount);
 
 private:
-	//Umieszcza element w odpowiednim miejscu
-	void fixUp();
-
 	//Naprawia kopiec algorytmem Floyda
 	void fixDown();
+
+	//Funkcja wypisujaca dzieci danego elementu
+	void print(string prefix, bool isLeft, int index);
 };
