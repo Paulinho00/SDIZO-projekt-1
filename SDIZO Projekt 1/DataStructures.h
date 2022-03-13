@@ -130,7 +130,7 @@ public:
 	void findElement(int value);
 
 	//Generowanie okreslonej liczby wartosci w strukturze
-	void fillList(int amount);
+	void fillHeap(int amount);
 
 private:
 	//Naprawia kopiec algorytmem Floyda

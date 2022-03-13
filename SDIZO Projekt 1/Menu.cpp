@@ -288,6 +288,20 @@ void binaryHeapMenu() {
 			}
 			binaryHeap.findElement(userInput);
 		}; break;
+		case 6: {
+			cout << "Podaj ilosc elementow ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			if (userInput <= 0) {
+				cout << "Nieprawidlowa ilosc\n";
+				break;
+			}
+
+			binaryHeap.fillHeap(userInput);
+		}; break;
 		case 0: return;
 		}
 	}

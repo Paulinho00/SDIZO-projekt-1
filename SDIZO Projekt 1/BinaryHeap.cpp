@@ -109,10 +109,21 @@ void BinaryHeap::findElement(int value) {
 	cout << "\n";
 }
 
+//Generowanie okreslonej liczby wartosci w strukturze
+void BinaryHeap::fillHeap(int amount) {
+	//Wypelnienie kopca elementami
+	dynArray->fillArray(amount);
+
+	//Uporzadkowanie kopca
+	heapCreateUp();
+
+}
+
 //Funkcja wypisujaca dzieci danego elementu
 void BinaryHeap::print(string prefix, bool isLeft, int index) {
 	if (index < dynArray->getSize()) {
-		cout << prefix + (isLeft ? "|--" : "\\--") << (dynArray->getArray())[index] << "\n";
+		if (!isLeft || index + 1 >= dynArray->getSize()) cout << prefix + "\\--" <<"[" <<(dynArray->getArray())[index]<< "]" << "\n";
+		else cout << prefix + "|--" << "[" << (dynArray->getArray())[index] << "]" << "\n";
 		print((prefix + (isLeft ? "|  " : "   ")), true, (index * 2 + 1));
 		print((prefix + (isLeft ? "|  " : "   ")), false, (index * 2 + 2));
 	}
