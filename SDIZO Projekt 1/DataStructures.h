@@ -134,7 +134,10 @@ public:
 
 private:
 	//Naprawia kopiec algorytmem Floyda
-	void fixDown();
+	void heapCreateUp();
+
+	//Naprawia kopiec zaczynajac od danej pozycji
+	void fixDown(int index);
 
 	//Funkcja wypisujaca dzieci danego elementu
 	void print(string prefix, bool isLeft, int index);
