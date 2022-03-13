@@ -246,6 +246,16 @@ void DynamicArray::fillArray(int amount) {
 	}
 }
 
+//Getter do tablicy dynamicznej
+int* DynamicArray::getArray() {
+	return array;
+}
+
+//Getter do rozmiaru tablicy
+long long DynamicArray::getSize() {
+	return size;
+}
+
 
 
 

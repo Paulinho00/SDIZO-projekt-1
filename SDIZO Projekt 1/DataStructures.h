@@ -44,6 +44,12 @@ public:
 
 	//Generowanie okreslonej liczby wartosci w strukturze
 	void fillArray(int amount);
+
+	//Getter do tablicy dynamicznej
+	int* getArray();
+
+	//Getter do rozmiaru tablicy
+	long long getSize();
 };
 
 //Element w tablicy
