@@ -1,4 +1,6 @@
 #include "DataStructures.h"
+#include <fstream>
+using namespace std;
 
 BinaryHeap::BinaryHeap() {
 	dynArray = new DynamicArray();
@@ -6,6 +8,53 @@ BinaryHeap::BinaryHeap() {
 
 BinaryHeap::~BinaryHeap() {
 	dynArray->~DynamicArray();
+}
+
+//Odczytuje do kopca, dane z pliku
+void BinaryHeap::readFromFile(std::string filename) {
+	//Usuniecie struktury
+	while(dynArray->getSize() != 0) {
+		deleteElement();
+	}
+
+	//Otwarcie pliku
+	fstream file;
+	file.open(filename, ios::in);
+	//Sprawdzenie poprawnosci otwarcia
+	if (file.is_open()) {
+
+		//Odczyt rozmiaru danych zawartych w pliku
+		int sizeOfData;
+		file >> sizeOfData;
+
+		//Sprawdzenie poprawnosci odczytu rozmiaru danych
+		if (file.fail()) {
+			cout << "Blad odczytu dlugosci pliku";
+		}
+		else {
+
+			//Odczyt wszystkich danych z pliku
+			for (int i = 0; i < sizeOfData; i++) {
+				int value;
+				file >> value;
+				//Sprawdzanie czy ka¿dy element zostal poprawnie odczytany
+				if (file.fail()) {
+					cout << "Blad odczytu danych";
+				}
+				else {
+					//Dodanie danej do tablicy
+					addElement(value);
+				}
+				//Zamkniêcie pliku
+
+			}
+			file.close();
+		}
+
+	}
+	else {
+		cout << "Blad otwarcia pliku\n";
+	}
 }
 
 //Dodaje element do kopca
@@ -108,3 +157,4 @@ void BinaryHeap::print(string prefix, bool isLeft, int index) {
 		print((prefix + (isLeft ? "|  " : "   ")), false, (index * 2 + 2));
 	}
 }
+

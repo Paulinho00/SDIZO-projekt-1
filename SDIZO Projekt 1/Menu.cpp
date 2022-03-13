@@ -258,6 +258,12 @@ void binaryHeapMenu() {
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
+		case 1: {
+			string filename;
+			cout << "Podaj nazwe pliku ";
+			cin >> filename;
+			binaryHeap.readFromFile(filename);
+		}; break;
 		case 2: {
 			cout << "Podaj wartosc ";
 			//Odczyt wyboru uzytkownika
@@ -270,7 +276,7 @@ void binaryHeapMenu() {
 		case 3: {
 			binaryHeap.deleteElement();
 		}; break;
-		case 6: {
+		case 4: {
 			binaryHeap.showElements();
 		}; break;
 		case 0: return;
