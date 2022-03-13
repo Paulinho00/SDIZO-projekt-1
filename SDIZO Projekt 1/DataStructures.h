@@ -74,7 +74,7 @@ public:
 	DoubleLinkedList();
 	~DoubleLinkedList();
 
-	//Odczytuje do tablicy, dane z pliku
+	//Odczytuje do listy, dane z pliku
 	void readFromFile(std::string filename);
 
 	//Dodaje element na koncu tablicy
@@ -97,4 +97,39 @@ public:
 
 	//Generowanie okreslonej liczby wartosci w strukturze
 	void fillList(int amount);
+};
+
+//Klasa reprezentujaca kopiec
+class BinaryHeap {
+private:
+	DynamicArray* dynArray;
+
+public:
+	BinaryHeap();
+	~BinaryHeap();
+
+	//Odczytuje do kopca, dane z pliku
+	void readFromFile(std::string filename);
+
+	//Dodaje element do kopca
+	void addElement(int value);
+
+	//Usuwa element ze szczytu
+	void deleteElement();
+
+	//Wyswietla zawartosc kopca
+	void showElements();
+
+	//Wyszukiwanie indeksow na ktorym znajduje sie podana wartosc
+	void findElement(int value);
+
+	//Generowanie okreslonej liczby wartosci w strukturze
+	void fillList(int amount);
+
+private:
+	//Umieszcza element w odpowiednim miejscu
+	void fixUp();
+
+	//Naprawia kopiec algorytmem Floyda
+	void fixDown();
 };
