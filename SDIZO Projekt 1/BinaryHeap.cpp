@@ -24,7 +24,7 @@ void BinaryHeap::addElement(int value) {
 		while (shouldContinueFixing) {
 			int indexOfParent = (indexOfNewElement - 1) / 2;
 			if (array[indexOfNewElement] > array[indexOfParent]) {
-				//Zamian miejsc z rodzicem nowego elementu
+				//Zamiana miejsc z rodzicem nowego elementu
 				int temp = array[indexOfParent];
 				array[indexOfParent] = array[indexOfNewElement];
 				array[indexOfNewElement] = temp;
@@ -40,6 +40,56 @@ void BinaryHeap::addElement(int value) {
 			}
 		}
 	}
+}
+
+//Usuwa element ze szczytu
+void BinaryHeap::deleteElement() {
+	//Pobranie tablicy w ktorej przechowywane sa elementy
+	int* arr = dynArray->getArray();
+
+	//Zmiana miejsca szczytu drzewa i ostatniego elementu w drzewie
+	int root = arr[0];
+	arr[0] = arr[(dynArray->getSize()) - 1];
+	arr[(dynArray->getSize()) - 1] = root;
+
+	//Usuniecie ostatniego elementu
+	dynArray->deleteElement();
+	arr = dynArray->getArray();
+	
+	bool shouldContinueFixing = true;
+	int currentIndex = 0;
+	while (shouldContinueFixing) {
+		//Indeks lewego dziecka
+		int leftChild = (2 * currentIndex) + 1;
+		//Indeks prawego dziecka
+		int rightChild = (2 * currentIndex) + 2;
+
+		//Sprawdzenie czy lewe dziecko jest wiêksze
+		if ( (leftChild < dynArray->getSize() && (arr[leftChild] > arr[currentIndex])) || (rightChild < dynArray->getSize() && (arr[rightChild] > arr[currentIndex]))) {
+
+			//Sprawdzenie ktory potomek jest wiekszy
+			if (arr[leftChild] > arr[rightChild]) {
+				//Zamiana miejsc z dzieckiem
+				int temp = arr[leftChild];
+				arr[leftChild] = arr[currentIndex];
+				arr[currentIndex] = temp;
+				currentIndex = leftChild;
+			}
+			else
+			{
+				//Zamiana miejsc z dzieckiem
+				int temp = arr[rightChild];
+				arr[rightChild] = arr[currentIndex];
+				arr[currentIndex] = temp;
+				currentIndex = rightChild;
+			}
+		}
+		else {
+			shouldContinueFixing = false;
+		}
+	}
+
+
 }
 
 //Wyswietla zawartosc kopca

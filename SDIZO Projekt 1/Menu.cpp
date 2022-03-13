@@ -267,6 +267,9 @@ void binaryHeapMenu() {
 			}
 			binaryHeap.addElement(userInput);
 		}; break;
+		case 3: {
+			binaryHeap.deleteElement();
+		}; break;
 		case 6: {
 			binaryHeap.showElements();
 		}; break;
