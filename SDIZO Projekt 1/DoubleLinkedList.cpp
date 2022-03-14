@@ -5,19 +5,19 @@
 #include "DataStructures.h"
 using namespace std;
 
-Node::Node(int value) {
+ListNode::ListNode(int value) {
 	this->value = value;
 	previous = nullptr;
 	next = nullptr;
 }
 
-Node::Node(int value, Node* next, Node* previous) {
+ListNode::ListNode(int value, ListNode* next, ListNode* previous) {
 	this->value = value;
 	this->previous = previous;
 	this->next = next;
 }
 
-Node::~Node() {
+ListNode::~ListNode() {
 	previous = nullptr;
 	next = nullptr;
 }
@@ -32,8 +32,8 @@ DoubleLinkedList::~DoubleLinkedList() {
 	if (head != nullptr) {
 		size = 0;
 		bool shouldContinue = true;
-		Node* currentNode;
-		Node* nextNode = head;
+		ListNode* currentNode;
+		ListNode* nextNode = head;
 		//Usuniecie wszystkich elementow
 		while (shouldContinue) {
 			currentNode = nextNode;
@@ -104,7 +104,7 @@ void DoubleLinkedList::addElement(int value) {
 	//Sprawdzenie czy lista jest zainicjalizowana
 	if (head == nullptr) {
 		//Inicjalizacja listy
-		Node* newNode = new Node(value);
+		ListNode* newNode = new ListNode(value);
 		head = newNode;
 		tail = newNode;
 		size++;
@@ -112,10 +112,10 @@ void DoubleLinkedList::addElement(int value) {
 	}
 
 	//Odczyt ostatniego elementu
-	Node* lastElement = tail;
+	ListNode* lastElement = tail;
 
 	//Zainicjowanie nowego elementu
-	Node* newElement = new Node(value);
+	ListNode* newElement = new ListNode(value);
 	lastElement->next = newElement;
 	newElement->previous = lastElement;
 	size++;
@@ -141,7 +141,7 @@ void DoubleLinkedList::addElementAtPosition(int position, int value) {
 	//Sprawdzenie czy element ma zostac dodany na poczatku
 	if (position == 0) {
 		//Inicjalizacja nowego elementu
-		Node* newElement = new Node(value);
+		ListNode* newElement = new ListNode(value);
 		newElement->next = head;
 		size++;
 
@@ -151,16 +151,16 @@ void DoubleLinkedList::addElementAtPosition(int position, int value) {
 		return;
 	}
 
-	Node* currentNode = head;
+	ListNode* currentNode = head;
 	//Odczyt elementu, ktory ma byc przed nowym elementem
 	for (int i = 0; i < position - 1; i++) {
 		currentNode = currentNode->next;
 	}
 
 	//Utworzenie i inicjalizacja nowego elementu
-	Node* newElement = new Node(value, currentNode->next, currentNode);
+	ListNode* newElement = new ListNode(value, currentNode->next, currentNode);
 	//Zmiana wskaznikow w poprzedzajacym i nastepujacym elemencie
-	Node* elementAfterNewElement = currentNode->next;
+	ListNode* elementAfterNewElement = currentNode->next;
 	elementAfterNewElement->previous = newElement;
 	currentNode->next = newElement;
 	size++;
@@ -185,9 +185,9 @@ void DoubleLinkedList::deleteElement() {
 	}
 
 	//Usuniecie elementu
-	Node* elementToDelete = tail;
+	ListNode* elementToDelete = tail;
 	tail = elementToDelete->previous;
-	Node* penultimateElement = elementToDelete->previous;
+	ListNode* penultimateElement = elementToDelete->previous;
 	penultimateElement->next = nullptr;
 	delete elementToDelete;
 	size--;
@@ -216,8 +216,8 @@ void DoubleLinkedList::deleteElementAtPosition(int position) {
 	//Sprawdzenie czy usuwany element jest na poczatku listy
 	if (position == 0) {
 		//Odczyt pierwszego i drugiego elementu z listy
-		Node* elementToDelete = head;
-		Node* secondElement = elementToDelete->next;
+		ListNode* elementToDelete = head;
+		ListNode* secondElement = elementToDelete->next;
 
 		//Usuniecie wskaznika na poprzedni element w drugim elemencie listy
 		secondElement->previous = nullptr;
@@ -230,13 +230,13 @@ void DoubleLinkedList::deleteElementAtPosition(int position) {
 	}
 
 	//Wyszukanie elementu do usuniêca
-	Node* currentNode = head;
+	ListNode* currentNode = head;
 	for (int i = 0; i < position; i++) {
 		currentNode = currentNode->next;
 	}
 
 	//Usuniecie elementu
-	Node* previousElement = currentNode->previous;
+	ListNode* previousElement = currentNode->previous;
 	previousElement->next = currentNode->next;
 	currentNode->next->previous = previousElement;
 	delete currentNode;
@@ -254,7 +254,7 @@ void DoubleLinkedList::showElements() {
 	//Wypisywanie listy
 	cout << "Wartosci: ";
 	bool hasNextElement = true;
-	Node* currentNode = head;
+	ListNode* currentNode = head;
 	while (hasNextElement) {
 		cout << currentNode->value << ", ";
 
@@ -297,7 +297,7 @@ void DoubleLinkedList::findElement(int value) {
 
 	cout << "\nLiczby o zadanej wartosci znajduja sie na indeksach: ";
 	int position = 0;
-	Node* element = head;
+	ListNode* element = head;
 	while (element != nullptr) {
 		if (element->value == value) {
 			cout << position << ", ";

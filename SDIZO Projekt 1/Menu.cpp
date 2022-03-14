@@ -303,6 +303,7 @@ void binaryHeapMenu() {
 			binaryHeap.fillHeap(userInput);
 		}; break;
 		case 0: return;
+		default: cout << "Nie ma takiej oppcji\n"; break;
 		}
 	}
 }

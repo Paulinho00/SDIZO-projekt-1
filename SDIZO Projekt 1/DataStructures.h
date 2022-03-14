@@ -53,17 +53,17 @@ public:
 };
 
 //Element w tablicy
-struct Node {
+struct ListNode {
 	//Wskaünik na poprzedni element
-	Node* previous;
+	ListNode* previous;
 	//Wskaünik na nastepny element
-	Node* next;
+	ListNode* next;
 	//Przechowywana wartoúÊ
 	int value;
 
-	Node(int value);
-	Node(int value, Node* next, Node* previous);
-	~Node();
+	ListNode(int value);
+	ListNode(int value, ListNode* next, ListNode* previous);
+	~ListNode();
 
 };
 
@@ -71,9 +71,9 @@ struct Node {
 class DoubleLinkedList {
 private:
 	//Wskaünik na pierwszy element listy
-	Node* head;
+	ListNode* head;
 	//Wskaünik na ostatni element listy
-	Node* tail;
+	ListNode* tail;
 	//Rozmiar listy
 	int size;
 public:
