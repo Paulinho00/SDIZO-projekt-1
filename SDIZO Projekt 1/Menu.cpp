@@ -123,7 +123,7 @@ void dynamicArrayMenu() {
 			dynamicArray.fillArray(userInput);
 		}; break;
 		case 0: return;
-		default: cout << "Nie ma takiej oppcji\n"; break;
+		default: cout << "Nie ma takiej opcji\n"; break;
 		};
 
 
@@ -229,7 +229,7 @@ void doubleLinkedListMenu() {
 			doubleLinkedList.fillList(userInput);
 		}; break;
 		case 0: return;
-		default: cout << "Nie ma takiej oppcji\n"; break;
+		default: cout << "Nie ma takiej opcji\n"; break;
 		};
 	}
 }
@@ -280,7 +280,7 @@ void binaryHeapMenu() {
 			binaryHeap.showElements();
 		}; break;
 		case 5: {
-			cout << "Podaj pozycje usuwanego elementu ";
+			cout << "Podaj wartosc wyszukiwanego elementu ";
 			//Odczyt wyboru uzytkownika
 			userInput = readUserInput();
 			if (userInput == -1) {
@@ -303,13 +303,14 @@ void binaryHeapMenu() {
 			binaryHeap.fillHeap(userInput);
 		}; break;
 		case 0: return;
-		default: cout << "Nie ma takiej oppcji\n"; break;
+		default: cout << "Nie ma takiej opcji\n"; break;
 		}
 	}
 }
 
 //Menu wyboru do BST
-void BSTStructureMenu() {
+void bstStructureMenu() {
+	Bst bst;
 	while (1) {
 		//Wyswietlenie opcji w menu
 		cout << "\nWybierz opcje:\n";
@@ -334,8 +335,20 @@ void BSTStructureMenu() {
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
+		case 2: {
+			cout << "Podaj wartosc ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			bst.addElement(userInput);
+		}; break;
+		case 4: {
+			bst.showElements();
+		}; break;
 		case 0: return;
-		default: cout << "Nie ma takiej oppcji\n"; break;
+		default: cout << "Nie ma takiej opcji\n"; break;
 		}
 	}
 }
@@ -365,8 +378,9 @@ void dataStructuresMenu() {
 		case 1: dynamicArrayMenu(); break;
 		case 2: doubleLinkedListMenu(); break;
 		case 3: binaryHeapMenu(); break;
+		case 4: bstStructureMenu(); break;
 		case 0: exit(0);
-		default: cout << "Nie ma takiej oppcji\n"; break;
+		default: cout << "Nie ma takiej opcji\n"; break;
 		};
 
 	}

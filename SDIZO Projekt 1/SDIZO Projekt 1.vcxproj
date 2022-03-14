@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BinaryHeap.cpp" />
+    <ClCompile Include="Bst.cpp" />
     <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="DoubleLinkedList.cpp" />
     <ClCompile Include="Menu.cpp" />

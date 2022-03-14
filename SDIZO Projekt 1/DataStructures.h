@@ -194,4 +194,8 @@ public:
 
 	//Rotacja w prawo na wybranym elemencie
 	void rotateRight(int value);
+
+private:
+	//Funkcja wypisujaca potomkow danego elementu
+	void print(string prefix, bool isLeft, BstNode* node);
 };
