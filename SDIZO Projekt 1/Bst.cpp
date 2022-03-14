@@ -112,6 +112,10 @@ void Bst::deleteElement(int value) {
 			//Zwolnienie pamieci
 			delete next;
 		}
+		else {
+			//Zwolnienie pamieci
+			delete deleteNode;
+		}
 		
 	}
 	else {
@@ -135,14 +139,14 @@ BstNode* Bst::findSuccessor(BstNode* element) {
 	//Sprawdzenie czy element ma prawego potomka
 	if (element->right != nullptr) {
 		//Zwrocenie nastepnika
-		return findMinKey(element);
+		return findMinKey(element->right);
 	}
 	//Odczyt rodzica danego elementu
 	BstNode* elementParent = element->parent;
 	//Pêtla szukajaca nastepnika
 	while (elementParent != nullptr && elementParent->left != element) {
 		element = elementParent;
-		elementParent = element->parent;
+		elementParent = elementParent->parent;
 	}
 	return elementParent;
 }
