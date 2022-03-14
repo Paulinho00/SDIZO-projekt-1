@@ -308,6 +308,37 @@ void binaryHeapMenu() {
 	}
 }
 
+//Menu wyboru do BST
+void BSTStructureMenu() {
+	while (1) {
+		//Wyswietlenie opcji w menu
+		cout << "\nWybierz opcje:\n";
+		cout << "1. Odczytaj dane z pliku\n";
+		cout << "2. Dodaj element do drzewa\n";
+		cout << "3. Usun wybrany element\n";
+		cout << "4. Wyswietl wszystkie wartosci\n";
+		cout << "5. Znajdz wartosc w drzewie\n";
+		cout << "6. Wygeneruj wartosci losowe\n";
+		cout << "7. Wykonaj rownowazenie algorytmem DSW\b";
+		cout << "8. Wykonaj rotacje w prawo dla wybranego elementu\n";
+		cout << "9. Wykonaj rotacje w lewo dla wybranego elementu\n";
+		cout << "0. Cofnij do menu glownego\n";
+		cout << "Podaj odpowiednia liczbe\n";
+
+		//Odczyt wyboru uzytkownika
+		int userInput;
+		userInput = readUserInput();
+		if (userInput == -1) {
+			continue;
+		}
+
+		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
+		switch (userInput) {
+		case 0: return;
+		default: cout << "Nie ma takiej oppcji\n"; break;
+		}
+	}
+}
 //Funkcja wyswietlajaca menu i zarzadzajaca wyborem uzytkownika
 void dataStructuresMenu() {
 	while (1) {

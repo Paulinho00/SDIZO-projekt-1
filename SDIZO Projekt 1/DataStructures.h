@@ -126,7 +126,7 @@ public:
 	//Wyswietla zawartosc kopca
 	void showElements();
 
-	//Wyszukiwanie indeksow na ktorym znajduje sie podana wartosc
+	//Wyszukiwanie pozycji na ktorym znajduje sie podana wartosc
 	void findElement(int value);
 
 	//Generowanie okreslonej liczby wartosci w strukturze
@@ -141,4 +141,57 @@ private:
 
 	//Funkcja wypisujaca dzieci danego elementu
 	void print(string prefix, bool isLeft, int index);
+};
+
+//Element w BST
+struct BstNode {
+	//Wartosc wierzcholka
+	int key;
+	//Wskaznik na lewego potomka
+	BstNode* left;
+	//Wskaznik na prawego potomka
+	BstNode* right;
+	//Wskaznik na rodzica
+	BstNode* parent;
+
+	BstNode(int value);
+	BstNode(int value, BstNode* parent);
+	~BstNode();
+};
+
+//Drzewo poszukiwan binarnych
+class Bst {
+private:
+	//Korzen drzewa
+	BstNode* root;
+public:
+	Bst();
+	~Bst();
+
+	//Odczytuje do kopca, dane z pliku
+	void readFromFile(std::string filename);
+
+	//Dodaje element do kopca
+	void addElement(int value);
+
+	//Usuwa wybrany element
+	void deleteElement(int value);
+
+	//Wyswietla zawartosc BST
+	void showElements();
+
+	//Wyszukiwanie pozycji na ktorym znajduje sie podana wartosc
+	void findElement(int value);
+
+	//Generowanie okreslonej liczby wartosci w strukturze
+	void fillBst(int amount);
+
+	//Rownowazenie drzewa metoda DSW
+	void dswBalance();
+	
+	//Rotacja w lewo na wybranym elemencie
+	void rotateLeft(int value);
+
+	//Rotacja w prawo na wybranym elemencie
+	void rotateRight(int value);
 };
