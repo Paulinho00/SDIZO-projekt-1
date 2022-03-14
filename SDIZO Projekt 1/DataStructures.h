@@ -198,4 +198,13 @@ public:
 private:
 	//Funkcja wypisujaca potomkow danego elementu
 	void print(string prefix, bool isLeft, BstNode* node);
+
+	//Znajduje nastepnik elementu
+	BstNode* findSuccessor(BstNode* element);
+
+	//Znajduje wskaznik na dany element
+	BstNode* findPointerToElement(int value);
+
+	//Zwraca najmniejszy klucz zaczynajac od danego elementu
+	BstNode* findMinKey(BstNode* element);
 };

@@ -320,7 +320,7 @@ void bstStructureMenu() {
 		cout << "4. Wyswietl wszystkie wartosci\n";
 		cout << "5. Znajdz wartosc w drzewie\n";
 		cout << "6. Wygeneruj wartosci losowe\n";
-		cout << "7. Wykonaj rownowazenie algorytmem DSW\b";
+		cout << "7. Wykonaj rownowazenie algorytmem DSW\n";
 		cout << "8. Wykonaj rotacje w prawo dla wybranego elementu\n";
 		cout << "9. Wykonaj rotacje w lewo dla wybranego elementu\n";
 		cout << "0. Cofnij do menu glownego\n";
@@ -343,6 +343,15 @@ void bstStructureMenu() {
 				break;
 			}
 			bst.addElement(userInput);
+		}; break;
+		case 3: {
+			cout << "Podaj wartosc ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			bst.deleteElement(userInput);
 		}; break;
 		case 4: {
 			bst.showElements();

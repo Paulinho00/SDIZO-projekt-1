@@ -16,8 +16,8 @@ BstNode::BstNode(int value, BstNode* parent) {
 }
 
 BstNode::~BstNode() {
-	delete left;
-	delete right;
+	left = nullptr;
+	right = nullptr;
 }
 
 Bst::Bst() {
@@ -67,4 +67,90 @@ void Bst::addElement(int value) {
 		if (value > parent->key) parent->right = newElement;
 		else parent->left = newElement;
 	}
+}
+
+//Usuwa wybrany element
+void Bst::deleteElement(int value) {
+	//Wyszukanie wskaznikan usuwany element
+	BstNode* deleteNode = findPointerToElement(value);
+	if (deleteNode != nullptr) {
+		BstNode* next;
+		BstNode* child;
+		//Sprawdzenie czy element ma potomka
+		if (deleteNode->left == nullptr || deleteNode->right == nullptr) {
+			next = deleteNode;
+		}
+		else {
+			//Znalezienie nastepnika
+			next = findSuccessor(deleteNode);
+		}
+
+		//Odczyt jedynego potomka nastepnika
+		if (next->left != nullptr) child = next->left;
+		else child = next->right;
+
+		//Sprawdzenie czy nastepnik ma jakiegos potomka
+		if (child != nullptr) {
+			//Dodanie do dziecka rodzica nastepnika, 
+			child->parent = next->parent;
+		}
+
+		//Sprawdzenie czy nastepnik ma rodzica
+		if (next->parent == nullptr) {
+			//Zmiana korzenia
+			root = child;
+		}
+		else {
+			//Sprawdzenie ktorym potomkiem jest nastepnik i podmiana u potomka nastepnika
+			if (next == next->parent->left)  next->parent->left = child;
+			else next->parent->right = child;
+		}
+
+		//Sprawdzenie czy trzeba zamieniac pozycje nastepnika i usuwanego elementu
+		if (deleteNode != next) {
+			deleteNode->key = next->key;
+			//Zwolnienie pamieci
+			delete next;
+		}
+		
+	}
+	else {
+		cout << "Nie ma takiego elementu\n";
+	}
+}
+
+//Znajduje wskaznik na dany element
+BstNode* Bst::findPointerToElement(int value) {
+	BstNode* currentElement = root;
+	//Pêtla przeszukuj¹ca drzewo
+	while (currentElement != nullptr && currentElement->key != value) {
+		if (value < currentElement->key) currentElement = currentElement->left;
+		else currentElement = currentElement->right;
+	}
+	return currentElement;
+}
+
+//Znajduje nastepnik elementu
+BstNode* Bst::findSuccessor(BstNode* element) {
+	//Sprawdzenie czy element ma prawego potomka
+	if (element->right != nullptr) {
+		//Zwrocenie nastepnika
+		return findMinKey(element);
+	}
+	//Odczyt rodzica danego elementu
+	BstNode* elementParent = element->parent;
+	//Pêtla szukajaca nastepnika
+	while (elementParent != nullptr && elementParent->left != element) {
+		element = elementParent;
+		elementParent = element->parent;
+	}
+	return elementParent;
+}
+
+BstNode* Bst::findMinKey(BstNode* element) {
+	//Pêtla przechodz¹ca po lewych potomkach danego elementu
+	while (element->left != nullptr) {
+		element = element->left;
+	}
+	return element;
 }
