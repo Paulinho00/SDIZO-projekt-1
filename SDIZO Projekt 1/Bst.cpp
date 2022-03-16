@@ -234,6 +234,37 @@ void Bst::fillBst(int amount) {
 
 }
 
+//Rotacja w lewo na wybranym elemencie
+void Bst::rotateLeft(int value) {
+	BstNode* node = findPointerToElement(value);
+	//Sprawdzenie czy dany element istnieje
+	if (node != nullptr) {
+		//Sprawdzenie czy jest spelniony warunek konieczny do rotacji
+		if (node->right == nullptr) {
+			cout << "Niemozliwe jest wykonanie takiej rotacji dla tego elementu\n";
+			return;
+		}
+		else {
+			
+			//Rotacja poprzez zmiane wskaznikow na dzieci i rodzicow
+			BstNode* rightChild = node->right;
+			node->right = rightChild->left;
+			if (rightChild->left != nullptr) rightChild->left->parent = node;
+			rightChild->parent = node->parent;
+			if (node->parent != nullptr) {
+				if (node->parent->left == node) node->parent->left = rightChild;
+				else node->parent->right = rightChild;
+			}
+			rightChild->left = node;
+			node->parent = rightChild;
+		}
+	}
+	else {
+		cout << "Nie ma takiego elementu\n";
+	}
+}
+
+
 //Znajduje wskaznik na dany element
 BstNode* Bst::findPointerToElement(int value) {
 	BstNode* currentElement = root;
@@ -280,3 +311,4 @@ void Bst::dropTree(BstNode* element) {
 		delete element;
 	}
 }
+

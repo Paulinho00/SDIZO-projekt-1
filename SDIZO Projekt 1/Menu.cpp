@@ -385,6 +385,15 @@ void bstStructureMenu() {
 
 			bst.fillBst(userInput);
 		}; break;
+		case 9: {
+			cout << "Podaj wartosc elementu, na ktorym chcesz wykonac rotacje w lewo: ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			bst.rotateLeft(userInput);
+		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej opcji\n"; break;
 		}
