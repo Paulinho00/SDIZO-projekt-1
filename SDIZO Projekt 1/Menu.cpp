@@ -371,6 +371,20 @@ void bstStructureMenu() {
 			}
 			bst.findElement(userInput);
 		}; break;
+		case 6: {
+			cout << "Podaj ilosc elementow ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			if (userInput <= 0) {
+				cout << "Nieprawidlowa ilosc\n";
+				break;
+			}
+
+			bst.fillBst(userInput);
+		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej opcji\n"; break;
 		}

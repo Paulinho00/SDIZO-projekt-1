@@ -34,6 +34,7 @@ void Bst::readFromFile(std::string filename) {
 	//Usuniecie struktury
 	if (root != nullptr) {
 		dropTree(root);
+		root = nullptr;
 	}
 	//Otwarcie pliku
 	fstream file;
@@ -200,6 +201,26 @@ void Bst::findElement(int value) {
 	else {
 		cout << "Nie ma takiego elementu\n";
 	}
+}
+
+//Generowanie okreslonej liczby wartosci w strukturze
+void Bst::fillBst(int amount) {
+	//Usuniecie struktury
+	if (root != nullptr) {
+		dropTree(root);
+		root = nullptr;
+	}
+
+	//Uzupelnienie listy
+	for (int i = 0; i < amount; i++) {
+		int newValue;
+		//Losowanie unikatowej wartosci
+		do {
+			newValue = randomValue();
+		} while (findPointerToElement(newValue) != nullptr);
+		addElement(newValue);
+	}
+
 }
 
 //Znajduje wskaznik na dany element
