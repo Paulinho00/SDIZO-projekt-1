@@ -197,7 +197,7 @@ public:
 
 private:
 	//Funkcja wypisujaca potomkow danego elementu
-	void print(string prefix, bool isLeft, BstNode* node);
+	void print(string prefix, string childrenPrefix, BstNode* node);
 
 	//Znajduje nastepnik elementu
 	BstNode* findSuccessor(BstNode* element);

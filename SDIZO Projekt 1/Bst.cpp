@@ -81,15 +81,26 @@ void Bst::showElements() {
 	cout << "\n";
 
 	//Wywolanie funkcji wypisujacej
-	print("", false, root);
+	print("", "", root);
 }
 
 //Funkcja wypisujaca potomkow danego elementu
-void Bst::print(string prefix, bool isLeft, BstNode* node) {
+void Bst::print(string prefix, string childrenPrefix, BstNode* node) {
 	if (node != nullptr) {
-		cout << prefix + (isLeft ? "|--" : "\\--") << "[" << node->key << "]\n";
-		print((prefix + (isLeft ? "|  " : "   ")), true, node->left);
-		print((prefix + (isLeft ? "|  " : "   ")), false, node->right);
+		cout << " " << prefix <<"[" << node->key <<"]" << endl;
+		BstNode* next;
+		if (node->left != nullptr) {
+			next = node->left;
+			if (node->right != nullptr) {
+				print(childrenPrefix + "   |--", childrenPrefix + "   |   ", node->left);
+			}
+			else {
+				print(childrenPrefix + "   |--", childrenPrefix + "       ", node->left);
+			}
+		}
+		if (node->right != nullptr) {
+			print(childrenPrefix + "   \\--", childrenPrefix + "       ",node->right);
+		}
 	}
 }
 
