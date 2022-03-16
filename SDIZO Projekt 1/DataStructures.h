@@ -207,4 +207,7 @@ private:
 
 	//Zwraca najmniejszy klucz zaczynajac od danego elementu
 	BstNode* findMinKey(BstNode* element);
+
+	//Usuwa cale drzewo
+	void dropTree(BstNode* element);
 };

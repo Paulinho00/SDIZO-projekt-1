@@ -335,6 +335,12 @@ void bstStructureMenu() {
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
+		case 1: {
+			string filename;
+			cout << "Podaj nazwe pliku ";
+			cin >> filename;
+			bst.readFromFile(filename);
+		}; break;
 		case 2: {
 			cout << "Podaj wartosc ";
 			//Odczyt wyboru uzytkownika
