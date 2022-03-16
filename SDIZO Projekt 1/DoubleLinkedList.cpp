@@ -291,7 +291,7 @@ void DoubleLinkedList::showElements() {
 void DoubleLinkedList::findElement(int value) {
 	//Sprawdzenie czy lista jest pusta
 	if (head == nullptr) {
-		cout << "Tablica jest pusta\n";
+		cout << "Lista jest pusta\n";
 		return;
 	}
 

@@ -94,6 +94,12 @@ void Bst::print(string prefix, bool isLeft, BstNode* node) {
 
 //Dodaje element do kopca
 void Bst::addElement(int value) {
+	//Sprawdzenie czy nie probujemy dodac duplikatu
+	if (findPointerToElement(value) != nullptr) {
+		cout << "Istnieje element o takim kluczu, dodawanie duplikatow jest zabronione\n";
+		return;
+	}
+
 	BstNode* parent = nullptr;
 	BstNode* currentNode = root;
 	//Wyszukanie rodzica dla nowego elementu
@@ -174,6 +180,26 @@ void Bst::deleteElement(int value) {
 void Bst::findElement(int value) {
 	//Wyszukanie wskaznika na element
 	BstNode* element = findPointerToElement(value);
+	if (element != nullptr) {
+		//Wyswietlenie odpowiedniego komunikatu
+		cout << " Element o wartosci: " << value << endl;
+		//Wyswietlenie informacji o rodzicu
+		cout << "   Rodzic: ";
+		if (element != root) cout << element->parent->key << endl;
+		else cout << "Brak\n";
+		//Wyswietlenie informacji o lewym nastepniku
+		cout << "   Lewy nastepnik: ";
+		if (element->left != nullptr) cout << element->left->key << endl;
+		else cout << "Brak\n";
+		//Wyswietleie informacji o prawym nastepniku
+		cout << "   Prawy nastepnik: ";
+		if (element->right != nullptr) cout << element->right->key << endl;
+		else cout << "Brak\n";
+		cout << endl;
+	}
+	else {
+		cout << "Nie ma takiego elementu\n";
+	}
 }
 
 //Znajduje wskaznik na dany element
