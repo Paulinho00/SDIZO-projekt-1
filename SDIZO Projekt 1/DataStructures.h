@@ -164,6 +164,9 @@ class Bst {
 private:
 	//Korzen drzewa
 	BstNode* root;
+
+	//Liczba wezlow
+	int count;
 public:
 	Bst();
 	~Bst();

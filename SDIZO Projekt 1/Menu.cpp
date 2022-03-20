@@ -385,8 +385,11 @@ void bstStructureMenu() {
 
 			bst.fillBst(userInput);
 		}; break;
+		case 7: {
+			bst.dswBalance();
+		}; break;
 		case 8: {
-			cout << "Podaj wartosc elementu, na ktorym chcesz wykonac rotacje w lewo: ";
+			cout << "Podaj wartosc elementu, na ktorym chcesz wykonac rotacje w prawo: ";
 			//Odczyt wyboru uzytkownika
 			userInput = readUserInput();
 			if (userInput == -1) {

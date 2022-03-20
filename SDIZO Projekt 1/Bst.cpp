@@ -23,10 +23,12 @@ BstNode::~BstNode() {
 
 Bst::Bst() {
 	root = nullptr;
+	count = 0;
 }
 
 Bst::~Bst() {
 	delete root;
+	count = 0;
 }
 
 //Odczytuje do kopca, dane z pliku
@@ -92,14 +94,14 @@ void Bst::print(string prefix, string childrenPrefix, BstNode* node) {
 		if (node->left != nullptr) {
 			next = node->left;
 			if (node->right != nullptr) {
-				print(childrenPrefix + "   |--", childrenPrefix + "   |   ", node->left);
+				print(childrenPrefix + "  |--", childrenPrefix + "  |   ", node->left);
 			}
 			else {
-				print(childrenPrefix + "   |--", childrenPrefix + "       ", node->left);
+				print(childrenPrefix + "  |--", childrenPrefix + "      ", node->left);
 			}
 		}
 		if (node->right != nullptr) {
-			print(childrenPrefix + "   \\--", childrenPrefix + "       ",node->right);
+			print(childrenPrefix + "  \\--", childrenPrefix + "      ",node->right);
 		}
 	}
 }
@@ -123,6 +125,7 @@ void Bst::addElement(int value) {
 
 	//Tworzenie nowego elementu
 	BstNode* newElement = new BstNode(value, parent);
+	count++;
 	
 	//Sprawdzenie czy drzewo jest puste
 	if (parent == nullptr) {
@@ -181,7 +184,7 @@ void Bst::deleteElement(int value) {
 			//Zwolnienie pamieci
 			delete deleteNode;
 		}
-		
+		count--;
 	}
 	else {
 		cout << "Nie ma takiego elementu\n";
@@ -353,10 +356,36 @@ void Bst::dswBalance() {
 	BstNode* node = root;
 	while(node != nullptr){
 		if (node->left != nullptr) {
-			//rotateRight()
+			//Rotacja w prawo
+			rotateNodeRight(node);
+			node = node->parent;
+		}
+		else {
+			node = node->right;
+		}
+	}
+	
+	//Obliczanie ilosci wierzcholkow na poziomach calkowicie zapelnionych
+	int h = log2(count + 1);
+	int m = pow(2, h) - 1;
+	node = root;
+	//Petla wstepnie rownowazaca drzewo
+	for (int i = 0; i < count - m; i++) {
+		rotateNodeLeft(node);
+		if (node->parent != nullptr && node->parent->right != nullptr) node = node->parent->right;
+	}
+
+	//Petla rownowazaca drzewo
+	while (m > 1) {
+		m = m / 2;
+		node = root;
+		for (int i = 0; i < m; i++) {
+			rotateNodeLeft(node);
+			if(node->parent != nullptr && node->parent->right != nullptr) node = node->parent->right;
 		}
 	}
 }
+
 
 
 //Wyszukiwanie najmniejszej wartosci w drzewie od danego elementu
