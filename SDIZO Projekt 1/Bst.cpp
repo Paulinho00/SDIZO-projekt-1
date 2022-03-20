@@ -237,15 +237,32 @@ void Bst::fillBst(int amount) {
 //Rotacja w lewo na wybranym elemencie
 void Bst::rotateLeft(int value) {
 	BstNode* node = findPointerToElement(value);
+	//Wykonanie rotacji
+	int output = rotateNodeLeft(node);
+	if (output == -1) cout << "Nie ma takiego elementu\n";
+	else if (output == -2) cout << "Niemozliwe jest wykonanie takiej rotacji dla tego elementu\n";
+}
+
+//Rotacja w prawo na wybranym elemencie
+void Bst::rotateRight(int value) {
+	BstNode* node = findPointerToElement(value);
+	//Wykonanie rotacji
+	int output = rotateNodeRight(node);
+	if (output == -1) cout << "Nie ma takiego elementu\n";
+	else if(output == -2) cout << "Niemozliwe jest wykonanie takiej rotacji dla tego elementu\n";
+	
+}
+
+//Rotacja w lewo na wybranym elemencie
+int Bst::rotateNodeLeft(BstNode* node) {
 	//Sprawdzenie czy dany element istnieje
 	if (node != nullptr) {
 		//Sprawdzenie czy jest spelniony warunek konieczny do rotacji
 		if (node->right == nullptr) {
-			cout << "Niemozliwe jest wykonanie takiej rotacji dla tego elementu\n";
-			return;
+			return -2;
 		}
 		else {
-			
+
 			//Rotacja poprzez zmiane wskaznikow na dzieci i rodzicow
 			BstNode* rightChild = node->right;
 			node->right = rightChild->left;
@@ -265,25 +282,22 @@ void Bst::rotateLeft(int value) {
 		}
 	}
 	else {
-		cout << "Nie ma takiego elementu\n";
+		return -1;
 	}
 }
 
 //Rotacja w prawo na wybranym elemencie
-void Bst::rotateRight(int value) {
-	BstNode* node = findPointerToElement(value);
+int Bst::rotateNodeRight(BstNode* node) {
 	//Sprawdzenie czy dany element istnieje
 	if (node != nullptr) {
 		//Sprawdzenie czy jest spelniony warunek konieczny do rotacji
 		if (node->left == nullptr) {
-			cout << "Niemozliwe jest wykonanie takiej rotacji dla tego elementu\n";
-			return;
+			return -2;
 		}
 		else {
 			//Rotacja poprzez zmiane wskaznikow na dzieci i rodzicow
 			BstNode* leftChild = node->left;
 			node->left = leftChild->right;
-			//Spradzenie czy lewy potomek ma prawego potomka
 			if (leftChild->right != nullptr) leftChild->right->parent = node;
 			leftChild->parent = node->parent;
 
@@ -301,7 +315,7 @@ void Bst::rotateRight(int value) {
 		}
 	}
 	else {
-		cout << "Nie ma takiego elementu\n";
+		return -1;
 	}
 }
 
@@ -332,6 +346,16 @@ BstNode* Bst::findSuccessor(BstNode* element) {
 		elementParent = elementParent->parent;
 	}
 	return elementParent;
+}
+
+//Rownowazenie drzewa metoda DSW
+void Bst::dswBalance() {
+	BstNode* node = root;
+	while(node != nullptr){
+		if (node->left != nullptr) {
+			//rotateRight()
+		}
+	}
 }
 
 

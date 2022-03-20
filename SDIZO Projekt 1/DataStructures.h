@@ -192,8 +192,14 @@ public:
 	//Rotacja w lewo na wybranym elemencie
 	void rotateLeft(int value);
 
+	//Rotacja w lewo na wybranym elemencie
+	int rotateNodeLeft(BstNode* node);
+
 	//Rotacja w prawo na wybranym elemencie
 	void rotateRight(int value);
+
+	//Rotacja w prawo na wybranym elemencie
+	int rotateNodeRight(BstNode* node);
 
 private:
 	//Funkcja wypisujaca potomkow danego elementu
@@ -210,4 +216,5 @@ private:
 
 	//Usuwa cale drzewo
 	void dropTree(BstNode* element);
+
 };
