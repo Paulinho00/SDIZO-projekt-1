@@ -171,10 +171,10 @@ public:
 	Bst();
 	~Bst();
 
-	//Odczytuje do kopca, dane z pliku
+	//Odczytuje do drzewa, dane z pliku
 	void readFromFile(std::string filename);
 
-	//Dodaje element do kopca
+	//Dodaje element do drzewa
 	void addElement(int value);
 
 	//Usuwa wybrany element
@@ -220,4 +220,53 @@ private:
 	//Usuwa cale drzewo
 	void dropTree(BstNode* element);
 
+};
+
+//Enum do elementu drzewa czerwono czarnego
+enum class NodeColor {Red, Black};
+
+//Element drzewa czerwono czarnego
+struct RBTreeNode {
+	//Wskaznik na rodzica
+	RBTreeNode* parent;
+	//Wskaznik na lewego potomka
+	RBTreeNode* left;
+	//Wskaznik na prawego potomka
+	RBTreeNode* right;
+	//Klucz/wartosc przechowywana
+	int key;
+	//Kolor elementu
+	NodeColor color;
+	
+	RBTreeNode();
+	~RBTreeNode();
+};
+
+//Drzewo czerwono czarne
+class RedBlackTree {
+private:
+	//Korzen drzewa
+	RBTreeNode* root;
+
+public:
+	RedBlackTree();
+	~RedBlackTree();
+
+	//Odczytuje do kopca, dane z pliku
+	void readFromFile(std::string filename);
+
+	//Dodaje element do kopca
+	void addElement(int value);
+
+	//Usuwa wybrany element
+	void deleteElement(int value);
+
+	//Wyswietla zawartosc BST
+	void showElements();
+
+	//Wyszukiwanie pozycji na ktorym znajduje sie podana wartosc
+	void findElement(int value);
+
+	//Generowanie okreslonej liczby wartosci w strukturze
+	void fillBst(int amount);
 };

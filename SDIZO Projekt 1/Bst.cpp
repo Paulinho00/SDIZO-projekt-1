@@ -31,7 +31,7 @@ Bst::~Bst() {
 	count = 0;
 }
 
-//Odczytuje do kopca, dane z pliku
+//Odczytuje do drzewa, dane z pliku
 void Bst::readFromFile(std::string filename) {
 	//Usuniecie struktury
 	if (root != nullptr) {
@@ -106,7 +106,7 @@ void Bst::print(string prefix, string childrenPrefix, BstNode* node) {
 	}
 }
 
-//Dodaje element do kopca
+//Dodaje element do drzewa
 void Bst::addElement(int value) {
 	//Sprawdzenie czy nie probujemy dodac duplikatu
 	if (findPointerToElement(value) != nullptr) {
