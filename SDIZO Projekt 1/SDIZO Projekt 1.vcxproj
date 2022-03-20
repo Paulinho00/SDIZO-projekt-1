@@ -144,6 +144,7 @@
     <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="DoubleLinkedList.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="RedBlackTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructures.h" />
