@@ -238,7 +238,8 @@ struct RBTreeNode {
 	//Kolor elementu
 	NodeColor color;
 	
-	RBTreeNode();
+	RBTreeNode(int value, NodeColor color);
+	RBTreeNode(int value, RBTreeNode* parent, NodeColor color);
 	~RBTreeNode();
 };
 
@@ -269,4 +270,8 @@ public:
 
 	//Generowanie okreslonej liczby wartosci w strukturze
 	void fillBst(int amount);
+
+private:
+	//Usuwa cale drzewo
+	void dropTree(RBTreeNode* element);
 };

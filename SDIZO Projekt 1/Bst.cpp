@@ -19,6 +19,7 @@ BstNode::BstNode(int value, BstNode* parent) {
 BstNode::~BstNode() {
 	left = nullptr;
 	right = nullptr;
+	parent = nullptr;
 }
 
 Bst::Bst() {
@@ -27,7 +28,11 @@ Bst::Bst() {
 }
 
 Bst::~Bst() {
-	delete root;
+	//Usuniecie struktury
+	if (root != nullptr) {
+		dropTree(root);
+		root = nullptr;
+	}
 	count = 0;
 }
 
