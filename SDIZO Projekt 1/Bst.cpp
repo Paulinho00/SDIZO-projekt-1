@@ -251,12 +251,53 @@ void Bst::rotateLeft(int value) {
 			node->right = rightChild->left;
 			if (rightChild->left != nullptr) rightChild->left->parent = node;
 			rightChild->parent = node->parent;
+			//Sprawdzenie czy element jest korzeniem
 			if (node->parent != nullptr) {
 				if (node->parent->left == node) node->parent->left = rightChild;
 				else node->parent->right = rightChild;
 			}
+			else {
+				//Zmiana korzenia
+				root = rightChild;
+			}
 			rightChild->left = node;
 			node->parent = rightChild;
+		}
+	}
+	else {
+		cout << "Nie ma takiego elementu\n";
+	}
+}
+
+//Rotacja w prawo na wybranym elemencie
+void Bst::rotateRight(int value) {
+	BstNode* node = findPointerToElement(value);
+	//Sprawdzenie czy dany element istnieje
+	if (node != nullptr) {
+		//Sprawdzenie czy jest spelniony warunek konieczny do rotacji
+		if (node->left == nullptr) {
+			cout << "Niemozliwe jest wykonanie takiej rotacji dla tego elementu\n";
+			return;
+		}
+		else {
+			//Rotacja poprzez zmiane wskaznikow na dzieci i rodzicow
+			BstNode* leftChild = node->left;
+			node->left = leftChild->right;
+			//Spradzenie czy lewy potomek ma prawego potomka
+			if (leftChild->right != nullptr) leftChild->right->parent = node;
+			leftChild->parent = node->parent;
+
+			//Sprawdzenie czy element jest korzeniem
+			if (node->parent != nullptr) {
+				if (node->parent->left == node) node->parent->left = leftChild;
+				else node->parent->right = leftChild;
+			}
+			else {
+				//Zmiana korzenia
+				root = leftChild;
+			}
+			leftChild->right = node;
+			node->parent = leftChild;
 		}
 	}
 	else {
