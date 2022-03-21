@@ -291,7 +291,7 @@ private:
 	void print(string prefix, string childrenPrefix, RBTreeNode* node);
 
 	//Naprawianie koloru gdy element jest prawym potomkiem, prawego potomka dziadka
-	void rightRightFix(RBTreeNode* node);
+	void rightRightFix(RBTreeNode* grandParent, RBTreeNode* parent);
 
 	//Naprawianie koloru gdy element jest lewym potomkiem, prawego potomka dziadka
 	void rightLeftFix(RBTreeNode* node);
