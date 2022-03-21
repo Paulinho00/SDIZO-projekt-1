@@ -1,5 +1,4 @@
 #include "DataStructures.h"
-#include "Colors.h"
 #include <fstream>
 #include <string>
 using namespace std;
@@ -205,8 +204,10 @@ if (node->parent != nullptr) {
 				else parent->color = NodeColor::BLACK;
 
 				//Zmiana koloru dziadka na przeciwny
-				if (grandParent->color == NodeColor::BLACK) grandParent->color = NodeColor::RED;
-				else grandParent->color = NodeColor::BLACK;
+				if (grandParent != nullptr) {
+					if (grandParent->color == NodeColor::BLACK) grandParent->color = NodeColor::RED;
+					else grandParent->color = NodeColor::BLACK;
+				}
 			}
 			//Sprawdzenie czy wujek jest czarny i nowy element jest prawym potomkiem
 			else if ((uncle == nullptr || uncle->color == NodeColor::BLACK) && parent->right == node) {
@@ -219,8 +220,10 @@ if (node->parent != nullptr) {
 				else parent->color = NodeColor::BLACK;
 
 				//Zmiana koloru dziadka na przeciwny
-				if (grandParent->color == NodeColor::BLACK) grandParent->color = NodeColor::RED;
-				else grandParent->color = NodeColor::BLACK;
+				if (grandParent != nullptr) {
+					if (grandParent->color == NodeColor::BLACK) grandParent->color = NodeColor::RED;
+					else grandParent->color = NodeColor::BLACK;
+				}
 			}
 		}
 		else {
