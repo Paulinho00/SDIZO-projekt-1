@@ -223,7 +223,7 @@ private:
 };
 
 //Enum do elementu drzewa czerwono czarnego
-enum class NodeColor {Red, Black};
+enum class NodeColor {RED, BLACK};
 
 //Element drzewa czerwono czarnego
 struct RBTreeNode {
@@ -256,22 +256,37 @@ public:
 	//Odczytuje do kopca, dane z pliku
 	void readFromFile(std::string filename);
 
-	//Dodaje element do kopca
+	//Dodaje element do drzewa
 	void addElement(int value);
 
 	//Usuwa wybrany element
 	void deleteElement(int value);
 
-	//Wyswietla zawartosc BST
+	//Wyswietla zawartosc drzewa
 	void showElements();
 
 	//Wyszukiwanie pozycji na ktorym znajduje sie podana wartosc
 	void findElement(int value);
 
 	//Generowanie okreslonej liczby wartosci w strukturze
-	void fillBst(int amount);
+	void fillRbt(int amount);
 
 private:
 	//Usuwa cale drzewo
 	void dropTree(RBTreeNode* element);
+
+	//Znajduje wskaznik na dany element
+	RBTreeNode* findPointerToElement(int value);
+
+	//Rotacja w prawo na wybranym elemencie
+	int rotateNodeRight(RBTreeNode* node);
+
+	//Rotacja w lewo na wybranym elemencie
+	int rotateNodeLeft(RBTreeNode* node);
+
+	//Naprawa koloru po wstawieniu elementu
+	void fixColor(RBTreeNode* node);
+
+	//Funkcja wypisujaca potomkow danego elementu
+	void print(string prefix, string childrenPrefix, RBTreeNode* node);
 };

@@ -436,8 +436,20 @@ void redBlackTreeMenu() {
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
-			case 0: return;
-			default: cout << "Nie ma takiej opcji\n"; break;
+		case 2: {
+			cout << "Podaj wartosc ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			rbt.addElement(userInput);
+		}; break;
+		case 4: {
+			rbt.showElements();
+		}; break;
+		case 0: return;
+		default: cout << "Nie ma takiej opcji\n"; break;
 		}
 	}
 }
@@ -478,6 +490,7 @@ void dataStructuresMenu() {
 }
 
 int main() {
+	system("color f0");
 	dataStructuresMenu();
 }
 

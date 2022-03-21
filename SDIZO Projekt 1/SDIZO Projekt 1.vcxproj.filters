@@ -38,5 +38,8 @@
     <ClInclude Include="DataStructures.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
