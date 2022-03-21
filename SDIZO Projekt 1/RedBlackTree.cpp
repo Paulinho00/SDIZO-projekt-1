@@ -197,34 +197,15 @@ if (node->parent != nullptr) {
 				fixColor(grandParent);
 			}
 			//Sprawdzenie czy wujek jest czarny i nowy element jest lewym potomkiem
-			else if ((uncle == nullptr || uncle->color == NodeColor::BLACK) && parent->left == node) {
-					rotateNodeRight(grandParent);
-					//Zmiana koloru rodzica na przeciwny
-					if (parent->color == NodeColor::BLACK) parent->color = NodeColor::RED;
-					else parent->color = NodeColor::BLACK;
-
-					//Zmiana koloru dziadka na przeciwny
-					if (grandParent != nullptr) {
-						if (grandParent->color == NodeColor::BLACK) grandParent->color = NodeColor::RED;
-						else grandParent->color = NodeColor::BLACK;
-					}
+			else if ((uncle == nullptr || uncle->color == NodeColor::BLACK) && grandParent->left == parent) {
+				if (parent->left == node) leftLeftFix(grandParent, parent);
+				else leftRightFix(grandParent, parent);
 				
 			}
 			//Sprawdzenie czy wujek jest czarny i nowy element jest prawym potomkiem
 			else if ((uncle == nullptr || uncle->color == NodeColor::BLACK) && parent->right == node) {
-				//TODO tu jest gdzies blad
-				rotateNodeLeft(parent);
-				rotateNodeRight(grandParent);
-
-				//Zmiana koloru rodzica na przeciwny
-				if (parent->color == NodeColor::BLACK) parent->color = NodeColor::RED;
-				else parent->color = NodeColor::BLACK;
-
-				//Zmiana koloru dziadka na przeciwny
-				if (grandParent != nullptr) {
-					if (grandParent->color == NodeColor::BLACK) grandParent->color = NodeColor::RED;
-					else grandParent->color = NodeColor::BLACK;
-				}
+				if (parent->right == node) rightRightFix(grandParent, parent);
+				else rightLeftFix(grandParent, parent);
 			}
 		}
 		else {
@@ -302,4 +283,7 @@ void RedBlackTree::leftLeftFix(RBTreeNode* grandParent, RBTreeNode* parent) {
 }
 
 //Naprawianie koloru gdy element jest prawym potomkiem, lewego potomka dziadka
-void leftRightFix(RBTreeNode* grandParent, RBTreeNode* parent);
+void RedBlackTree::leftRightFix(RBTreeNode* grandParent, RBTreeNode* parent) {
+	rotateNodeLeft(parent);
+	leftLeftFix(grandParent, parent->parent);
+}

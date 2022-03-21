@@ -294,11 +294,11 @@ private:
 	void rightRightFix(RBTreeNode* grandParent, RBTreeNode* parent);
 
 	//Naprawianie koloru gdy element jest lewym potomkiem, prawego potomka dziadka
-	void rightLeftFix(RBTreeNode* node);
+	void rightLeftFix(RBTreeNode* grandParent, RBTreeNode* parent);
 
 	//Naprawianie koloru gdy element jest lewym potomkiem, lewego potomka dziadka
-	void leftLeftFix(RBTreeNode* node);
+	void leftLeftFix(RBTreeNode* grandParent, RBTreeNode* parent);
 
 	//Naprawianie koloru gdy element jest prawym potomkiem, lewego potomka dziadka
-	void leftRightFix(RBTreeNode* node);
+	void leftRightFix(RBTreeNode* grandParent, RBTreeNode* parent);
 };
