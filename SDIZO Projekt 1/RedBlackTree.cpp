@@ -198,15 +198,17 @@ if (node->parent != nullptr) {
 			}
 			//Sprawdzenie czy wujek jest czarny i nowy element jest lewym potomkiem
 			else if ((uncle == nullptr || uncle->color == NodeColor::BLACK) && parent->left == node) {
-				rotateNodeRight(grandParent);
-				//Zmiana koloru rodzica na przeciwny
-				if (parent->color == NodeColor::BLACK) parent->color = NodeColor::RED;
-				else parent->color = NodeColor::BLACK;
+				if (grandParent->left == parent) {
+					rotateNodeRight(grandParent);
+					//Zmiana koloru rodzica na przeciwny
+					if (parent->color == NodeColor::BLACK) parent->color = NodeColor::RED;
+					else parent->color = NodeColor::BLACK;
 
-				//Zmiana koloru dziadka na przeciwny
-				if (grandParent != nullptr) {
-					if (grandParent->color == NodeColor::BLACK) grandParent->color = NodeColor::RED;
-					else grandParent->color = NodeColor::BLACK;
+					//Zmiana koloru dziadka na przeciwny
+					if (grandParent != nullptr) {
+						if (grandParent->color == NodeColor::BLACK) grandParent->color = NodeColor::RED;
+						else grandParent->color = NodeColor::BLACK;
+					}
 				}
 			}
 			//Sprawdzenie czy wujek jest czarny i nowy element jest prawym potomkiem

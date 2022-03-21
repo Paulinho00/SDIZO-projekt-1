@@ -289,4 +289,16 @@ private:
 
 	//Funkcja wypisujaca potomkow danego elementu
 	void print(string prefix, string childrenPrefix, RBTreeNode* node);
+
+	//Naprawianie koloru gdy element jest prawym potomkiem, prawego potomka dziadka
+	void rightRightFix(RBTreeNode* node);
+
+	//Naprawianie koloru gdy element jest lewym potomkiem, prawego potomka dziadka
+	void rightLeftFix(RBTreeNode* node);
+
+	//Naprawianie koloru gdy element jest lewym potomkiem, lewego potomka dziadka
+	void leftLeftFix(RBTreeNode* node);
+
+	//Naprawianie koloru gdy element jest prawym potomkiem, lewego potomka dziadka
+	void leftRightFix(RBTreeNode* node);
 };
