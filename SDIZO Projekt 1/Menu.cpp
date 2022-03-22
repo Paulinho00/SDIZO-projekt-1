@@ -445,6 +445,15 @@ void redBlackTreeMenu() {
 			}
 			rbt.addElement(userInput);
 		}; break;
+		case 3: {
+			cout << "Podaj wartosc ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			rbt.deleteElement(userInput);
+		}; break;
 		case 4: {
 			rbt.showElements();
 		}; break;

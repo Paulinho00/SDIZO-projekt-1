@@ -68,7 +68,7 @@ void RedBlackTree::addElement(int value) {
 	else {
 		if (value > parent->key) parent->right = newElement;
 		else parent->left = newElement;
-		fixColor(newElement);
+		fixColorAfterInsertion(newElement);
 	}
 }
 
@@ -167,7 +167,7 @@ int RedBlackTree::rotateNodeLeft(RBTreeNode* node) {
 }
 
 //Naprawa koloru po wstawieniu elementu
-void RedBlackTree::fixColor(RBTreeNode* node) {
+void RedBlackTree::fixColorAfterInsertion(RBTreeNode* node) {
 	RBTreeNode* parent = nullptr;
 	RBTreeNode* grandParent = nullptr;
 	RBTreeNode* uncle = nullptr;
@@ -194,7 +194,7 @@ if (node->parent != nullptr) {
 				if(root ==grandParent) grandParent->color = NodeColor::BLACK;
 				else grandParent->color = NodeColor::RED;
 				//Wywolanie funkcji naprawiajacej kolory z dziadkiem
-				fixColor(grandParent);
+				fixColorAfterInsertion(grandParent);
 			}
 			//Sprawdzenie czy wujek jest czarny i nowy element jest lewym potomkiem
 			else if ((uncle == nullptr || uncle->color == NodeColor::BLACK) && grandParent->left == parent) {
@@ -203,7 +203,7 @@ if (node->parent != nullptr) {
 				
 			}
 			//Sprawdzenie czy wujek jest czarny i nowy element jest prawym potomkiem
-			else if ((uncle == nullptr || uncle->color == NodeColor::BLACK) && parent->right == node) {
+			else if ((uncle == nullptr || uncle->color == NodeColor::BLACK) && grandParent->right == parent) {
 				if (parent->right == node) rightRightFix(grandParent, parent);
 				else rightLeftFix(grandParent, parent);
 			}
@@ -215,6 +215,19 @@ if (node->parent != nullptr) {
 	else {
 		return;
 	}
+}
+
+//Usuwa wybrany element
+void RedBlackTree::deleteElement(int value) {
+	//Wyszukanie wskaznikan usuwany element, nastepnik i rodzic usuwanego elementu
+	RBTreeNode* deleteNode = findPointerToElement(value);
+	if (deleteNode != nullptr) {
+		deleteElementByPointer(deleteNode);
+	}
+	else {
+		cout << "Nie ma takiego elementu\n";
+	}
+	
 }
 
 //Funkcja wypisujaca potomkow danego elementu
@@ -286,4 +299,212 @@ void RedBlackTree::leftLeftFix(RBTreeNode* grandParent, RBTreeNode* parent) {
 void RedBlackTree::leftRightFix(RBTreeNode* grandParent, RBTreeNode* parent) {
 	rotateNodeLeft(parent);
 	leftLeftFix(grandParent, parent->parent);
+}
+
+//Zwraca najmniejszy klucz zaczynajac od danego elementu
+RBTreeNode*  RedBlackTree::findMinKey(RBTreeNode* element) {
+	//Pêtla przechodz¹ca po lewych potomkach danego elementu
+	while (element->left != nullptr) {
+		element = element->left;
+	}
+	return element;
+}
+
+//Znajduje nastepnik elementu
+RBTreeNode* RedBlackTree::findSuccessor(RBTreeNode* element) {
+	RBTreeNode* temp = element;
+	while (temp->left != nullptr) {
+		temp = temp->left;
+	}
+	return temp;
+}
+
+//Znajduje element zastepujacy usuwany
+RBTreeNode* RedBlackTree::findReplacement(RBTreeNode* element) {
+	//Znajduje nastepnik gdy element ma dwoje dzieci
+	if (element->left != nullptr && element->right != nullptr)
+		return findSuccessor(element->right);
+
+	//Zwraca null kiedy element jest lisciem
+	if (element->left == nullptr && element->right == nullptr)
+		return nullptr;
+
+	//Zwraca dziecko kiedy element ma jedno dziecko
+	if (element->left != nullptr)
+		return element->left;
+	else
+		return element->right;
+}
+
+//Naprawa koloru po usunieciu czarnego liscia
+void RedBlackTree::fixDoubleBlack(RBTreeNode* element) {
+	//Sprawdzenie czy element jest korzeniem
+	if (element == root)
+		return;
+
+	RBTreeNode* sibling;
+	RBTreeNode* parent = element->parent;
+	//Zmiena przechowujaca informacje czy rodzenstwo jest lewym dzieckiem
+	bool isOnLeft;
+
+	//Odczyt rodzenstwa elementu
+	if (parent == nullptr) {
+		sibling = nullptr;
+	}
+	else {
+		if (parent->left == element) {
+			sibling = parent->right;
+			isOnLeft = false;
+		}
+		else {
+			sibling = parent->left; 
+			isOnLeft = true;
+		}
+	}
+
+	//Sprawdzenie czy element ma rodzenstwo
+	if (sibling == nullptr) {
+		//Jesli nie ma to naprawa idzie w gore drzewa
+		fixDoubleBlack(parent);
+	}
+	else {
+		if (sibling->color == NodeColor::RED) {
+			parent->color = NodeColor::RED;
+			sibling->color = NodeColor::BLACK;
+			if (isOnLeft) {
+				rotateNodeRight(parent);
+			}
+			else {
+				rotateNodeLeft(parent);
+			}
+			fixDoubleBlack(element);
+		}
+		else {
+			//Sprawdzenie czy rodzenstwo ma czerwone dziecko
+			bool hasSiblingRedChild = (sibling->left != nullptr && sibling->left->color == NodeColor::RED) || (sibling->right != nullptr && sibling->right->color == NodeColor::RED);
+			if (hasSiblingRedChild) {
+				//Sprawdzenie czy czerwone dziecko jest z lewej strony
+				if (sibling->left != nullptr && sibling->left->color == NodeColor::RED) {
+					//Sprawdzenie czy rodzenstwo elementu jest z lewej strony
+					if (isOnLeft) {
+						//Czerwone dziecko po lewej, rodzenstwo po lewej
+						sibling->left->color = sibling->color;
+						sibling->color = parent->color;
+						rotateNodeRight(parent);
+					}
+					else {
+						//Czerwone dziecko po lewej, rodzenstwo po prawej
+						sibling->left->color = parent->color;
+						rotateNodeRight(sibling);
+						rotateNodeLeft(parent);
+					}
+				}
+				else {
+					//Sprawdzenie czy rodzenstwo elementu jest z lewej strony
+					if (isOnLeft) {
+						//Czerwone dziecko po prawej, rodzenstwo po lewej
+						sibling->right->color = parent->color;
+						rotateNodeLeft(sibling);
+						rotateNodeRight(parent);
+					}
+					else {
+						//Czerwone dziecko po prawej, rodzenstwo po prawej
+						sibling->right->color = sibling->color;
+						sibling->color = parent->color;
+						rotateNodeLeft(parent);
+					}
+				}
+				parent->color = NodeColor::BLACK;
+			}
+			else {
+				//Przypadek gdy rodzenstwo ma dwoje czarnych dzieci
+				sibling->color = NodeColor::RED;
+				if (parent->color == NodeColor::BLACK)
+					fixDoubleBlack(parent);
+				else {
+					parent->color = NodeColor::BLACK;
+				}
+			}
+		}
+	} 
+}
+
+//Usuwanie elementu wskazanego przez wskaznik
+void RedBlackTree::deleteElementByPointer(RBTreeNode* deleteNode) {
+	RBTreeNode* next = findReplacement(deleteNode);
+	RBTreeNode* parent = deleteNode->parent;
+
+	//Sprawdzenie czy nastepnik istnieje
+	if (next == nullptr) {
+		//Sprawdzenie czy usuwany element to korzen
+		if (deleteNode == root) {
+			//Usuniecie korzenia
+			root = nullptr;
+		}
+		else {
+			//sprawdzenie czy usuwany element i lisc sa czarni
+			if ((next == nullptr || next->color == NodeColor::BLACK) && (deleteNode->color == NodeColor::BLACK)) {
+				//Nastepnik i usuwany element sa czarni
+				fixDoubleBlack(deleteNode);
+			}
+			else {
+				RBTreeNode* siblingOfDeleteNode;
+				//Odczyt rodzenstwa
+				if (deleteNode->parent == nullptr) {
+					siblingOfDeleteNode = nullptr;
+				}
+				else {
+					if (deleteNode->parent->left == deleteNode) siblingOfDeleteNode = deleteNode->parent->right;
+					else siblingOfDeleteNode = deleteNode->parent->left;
+				}
+
+				//Nastepnik lub usuwany element jest czerwony
+				if (siblingOfDeleteNode != nullptr) {
+					siblingOfDeleteNode->color = NodeColor::RED;
+				}
+			}
+
+			if (deleteNode->parent->left == deleteNode) parent->left = nullptr;
+			else parent->right = nullptr;
+		}
+
+		delete deleteNode;
+		return;
+	}
+
+	if (deleteNode->left == nullptr || deleteNode->right == nullptr) {
+		//Usuwany element ma tylko jednego potomka
+		if (deleteNode == root) {
+			//Usuwany element jest korzeniem
+			deleteNode->key = next->key;
+			deleteNode->left = deleteNode->right = nullptr;
+			delete next;
+		}
+		else {
+			//Usuniecie elementu z drzewa i przesuniecie nastepnika w gore
+			if (parent->left == deleteNode) parent->left = next;
+			else parent->right = next;
+
+			delete deleteNode;
+			next->parent = parent;
+
+			if ((next == nullptr || next->color == NodeColor::BLACK) && (deleteNode->color == NodeColor::BLACK)) {
+				//Nastepnik i usuwany element sa czarni
+				fixDoubleBlack(deleteNode);
+			}
+			else {
+				//Nastepnik lub usuwany element jest czerwony
+				next->color = NodeColor::BLACK;
+			}
+		}
+		return;
+	}
+
+	//Usuwany element ma dwoje dzieci
+	//Zamiana wartosci
+	int temp;
+	temp = next->key;
+	next->key = deleteNode->key;
+	deleteNode->key = temp;
+	deleteElementByPointer(next);
 }

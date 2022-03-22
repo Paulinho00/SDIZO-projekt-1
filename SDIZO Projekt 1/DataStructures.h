@@ -285,7 +285,7 @@ private:
 	int rotateNodeLeft(RBTreeNode* node);
 
 	//Naprawa koloru po wstawieniu elementu
-	void fixColor(RBTreeNode* node);
+	void fixColorAfterInsertion(RBTreeNode* node);
 
 	//Funkcja wypisujaca potomkow danego elementu
 	void print(string prefix, string childrenPrefix, RBTreeNode* node);
@@ -301,4 +301,19 @@ private:
 
 	//Naprawianie koloru gdy element jest prawym potomkiem, lewego potomka dziadka
 	void leftRightFix(RBTreeNode* grandParent, RBTreeNode* parent);
+
+	//Zwraca najmniejszy klucz zaczynajac od danego elementu
+	RBTreeNode* findMinKey(RBTreeNode* element);
+
+	//Znajduje nastepnik elementu
+	RBTreeNode* findSuccessor(RBTreeNode* element);
+
+	//Znajduje element zastepujacy usuwany
+	RBTreeNode* findReplacement(RBTreeNode* element);
+
+	//Naprawa koloru po usunieciu czarnego liscia
+	void fixDoubleBlack(RBTreeNode* element);
+
+	//Usuwanie elementu wskazanego przez wskaznik
+	void deleteElementByPointer(RBTreeNode* deleteNode);
 };
