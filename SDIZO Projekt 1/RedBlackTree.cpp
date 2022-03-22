@@ -116,6 +116,25 @@ void RedBlackTree::findElement(int value) {
 	}
 }
 
+//Generowanie okreslonej liczby wartosci w strukturze
+void RedBlackTree::fillRbt(int amount) {
+	//Usuniecie struktury
+	if (root != nullptr) {
+		dropTree(root);
+		root = nullptr;
+	}
+
+	//Uzupelnienie listy
+	for (int i = 0; i < amount; i++) {
+		int newValue;
+		//Losowanie unikatowej wartosci
+		do {
+			newValue = randomValue();
+		} while (findPointerToElement(newValue) != nullptr);
+		addElement(newValue);
+	}
+}
+
 //Dodaje element do kopca
 void RedBlackTree::addElement(int value) {
 	//Sprawdzenie czy nie probujemy dodac duplikatu
