@@ -463,6 +463,15 @@ void redBlackTreeMenu() {
 		case 4: {
 			rbt.showElements();
 		}; break;
+		case 5: {
+			cout << "Podaj wartosc wyszukiwanego elementu ";
+			//Odczyt wyboru uzytkownika
+			userInput = readUserInput();
+			if (userInput == -1) {
+				break;
+			}
+			rbt.findElement(userInput);
+		}; break;
 		case 0: return;
 		default: cout << "Nie ma takiej opcji\n"; break;
 		}

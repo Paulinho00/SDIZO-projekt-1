@@ -202,17 +202,17 @@ void Bst::findElement(int value) {
 	BstNode* element = findPointerToElement(value);
 	if (element != nullptr) {
 		//Wyswietlenie odpowiedniego komunikatu
-		cout << " Element o wartosci: " << value << endl;
+		cout << "Element o wartosci : " << value << endl;
 		//Wyswietlenie informacji o rodzicu
-		cout << "   Rodzic: ";
+		cout << "Rodzic: ";
 		if (element != root) cout << element->parent->key << endl;
 		else cout << "Brak\n";
 		//Wyswietlenie informacji o lewym nastepniku
-		cout << "   Lewy nastepnik: ";
+		cout << "Lewy nastepnik: ";
 		if (element->left != nullptr) cout << element->left->key << endl;
 		else cout << "Brak\n";
 		//Wyswietleie informacji o prawym nastepniku
-		cout << "   Prawy nastepnik: ";
+		cout << "Prawy nastepnik: ";
 		if (element->right != nullptr) cout << element->right->key << endl;
 		else cout << "Brak\n";
 		cout << endl;

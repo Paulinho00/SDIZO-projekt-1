@@ -87,6 +87,35 @@ void RedBlackTree::readFromFile(std::string filename) {
 	}
 }
 
+//Wyszukiwanie pozycji na ktorym znajduje sie podana wartosc
+void RedBlackTree::findElement(int value) {
+	//Wyszukanie wskaznika na element
+	RBTreeNode* element = findPointerToElement(value);
+	if (element != nullptr) {
+		//Wyswietlenie odpowiedniego komunikatu
+		cout << "Element o wartosci: " << value << endl;
+		//Wyswietlenie koloru
+		if (element->color == NodeColor::RED) cout <<  "Kolor: " << red << "Czerwony" << black << endl;
+		else cout << "Kolor: Czarny" << endl;
+		//Wyswietlenie informacji o rodzicu
+		cout << "Rodzic: ";
+		if (element != root) cout << element->parent->key << endl;
+		else cout << "Brak\n";
+		//Wyswietlenie informacji o lewym nastepniku
+		cout << "Lewy nastepnik: ";
+		if (element->left != nullptr) cout << element->left->key << endl;
+		else cout << "Brak\n";
+		//Wyswietleie informacji o prawym nastepniku
+		cout << "Prawy nastepnik : ";
+		if (element->right != nullptr) cout << element->right->key << endl;
+		else cout << "Brak\n";
+		cout << endl;
+	}
+	else {
+		cout << "Nie ma takiego elementu\n";
+	}
+}
+
 //Dodaje element do kopca
 void RedBlackTree::addElement(int value) {
 	//Sprawdzenie czy nie probujemy dodac duplikatu
