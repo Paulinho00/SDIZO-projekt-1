@@ -436,6 +436,12 @@ void redBlackTreeMenu() {
 
 		//Uruchomienie odpowiedniej funkcji w zaleznosci od wyboru
 		switch (userInput) {
+		case 1: {
+			string filename;
+			cout << "Podaj nazwe pliku ";
+			cin >> filename;
+			rbt.readFromFile(filename);
+		}; break;
 		case 2: {
 			cout << "Podaj wartosc ";
 			//Odczyt wyboru uzytkownika

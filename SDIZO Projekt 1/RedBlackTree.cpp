@@ -40,6 +40,53 @@ RedBlackTree::~RedBlackTree() {
 	}
 }
 
+//Odczytuje do kopca, dane z pliku
+void RedBlackTree::readFromFile(std::string filename) {
+	//Usuniecie struktury
+	if (root != nullptr) {
+		dropTree(root);
+		root = nullptr;
+	}
+	//Otwarcie pliku
+	fstream file;
+	file.open(filename, ios::in);
+	//Sprawdzenie poprawnosci otwarcia
+	if (file.is_open()) {
+
+		//Odczyt rozmiaru danych zawartych w pliku
+		int sizeOfData;
+		file >> sizeOfData;
+
+		//Sprawdzenie poprawnosci odczytu rozmiaru danych
+		if (file.fail()) {
+			cout << "Blad odczytu dlugosci pliku";
+		}
+		else {
+
+			//Odczyt wszystkich danych z pliku
+			for (int i = 0; i < sizeOfData; i++) {
+				int value;
+				file >> value;
+				//Sprawdzanie czy ka¿dy element zostal poprawnie odczytany
+				if (file.fail()) {
+					cout << "Blad odczytu danych";
+				}
+				else {
+					//Dodanie danej do listy
+					addElement(value);
+				}
+				//Zamkniêcie pliku
+
+			}
+			file.close();
+		}
+
+	}
+	else {
+		cout << "Blad otwarcia pliku\n";
+	}
+}
+
 //Dodaje element do kopca
 void RedBlackTree::addElement(int value) {
 	//Sprawdzenie czy nie probujemy dodac duplikatu
