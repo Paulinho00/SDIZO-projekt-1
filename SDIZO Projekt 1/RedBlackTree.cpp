@@ -341,14 +341,14 @@ void RedBlackTree::print(string prefix, string childrenPrefix, RBTreeNode* node)
 		if (node->left != nullptr) {
 			next = node->left;
 			if (node->right != nullptr) {
-				print(childrenPrefix + "  |--", childrenPrefix + "  |   ", node->left);
+				print(childrenPrefix + "  L--", childrenPrefix + "  |   ", node->left);
 			}
 			else {
-				print(childrenPrefix + "  |--", childrenPrefix + "      ", node->left);
+				print(childrenPrefix + "  L--", childrenPrefix + "      ", node->left);
 			}
 		}
 		if (node->right != nullptr) {
-			print(childrenPrefix + "  \\--", childrenPrefix + "      ", node->right);
+			print(childrenPrefix + "  R--", childrenPrefix + "      ", node->right);
 		}
 	}
 }

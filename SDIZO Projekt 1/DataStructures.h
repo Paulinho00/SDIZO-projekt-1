@@ -140,7 +140,7 @@ private:
 	void fixDown(int index);
 
 	//Funkcja wypisujaca dzieci danego elementu
-	void print(string prefix, bool isLeft, int index);
+	void print(string prefix, string childrenPrefix, int position);
 };
 
 //Element w BST

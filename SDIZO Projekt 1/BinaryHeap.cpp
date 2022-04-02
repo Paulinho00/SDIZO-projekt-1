@@ -74,7 +74,7 @@ void BinaryHeap::showElements() {
 
 	cout << "\n";
 	//Wywolanie funkcji wypisujacej
-	print("", false, 0);
+	print("","",0);
 }
 
 //Wyszukuje elementy w drzewie
@@ -120,12 +120,22 @@ void BinaryHeap::fillHeap(int amount) {
 }
 
 //Funkcja wypisujaca dzieci danego elementu
-void BinaryHeap::print(string prefix, bool isLeft, int index) {
-	if (index < dynArray->getSize()) {
-		if (!isLeft || index + 1 >= dynArray->getSize()) cout << prefix + "\\--" <<"[" <<(dynArray->getArray())[index]<< "]" << "\n";
-		else cout << prefix + "|--" << "[" << (dynArray->getArray())[index] << "]" << "\n";
-		print((prefix + (isLeft ? "|  " : "   ")), true, (index * 2 + 1));
-		print((prefix + (isLeft ? "|  " : "   ")), false, (index * 2 + 2));
+void BinaryHeap::print(string prefix, string childrenPrefix, int position) {
+	if (position < dynArray->getSize()) {
+		cout << " " << prefix << "[" << dynArray->getArray()[position] << "]" << endl;
+		int next;
+		if ((2*position+1) < dynArray->getSize()) {
+			next = 2*position+1;
+			if (2 * position + 2 < dynArray->getSize()) {
+				print(childrenPrefix + "  L--", childrenPrefix + "  |   ", (2 * position + 1));
+			}
+			else {
+				print(childrenPrefix + "  L--", childrenPrefix + "      ", (2*position+1));
+			}
+		}
+		if ((2 * position + 2) < dynArray->getSize()) {
+			print(childrenPrefix + "  P--", childrenPrefix + "      ", (2*position+2));
+		}
 	}
 }
 

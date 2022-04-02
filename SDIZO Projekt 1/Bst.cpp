@@ -99,14 +99,14 @@ void Bst::print(string prefix, string childrenPrefix, BstNode* node) {
 		if (node->left != nullptr) {
 			next = node->left;
 			if (node->right != nullptr) {
-				print(childrenPrefix + "  |--", childrenPrefix + "  |   ", node->left);
+				print(childrenPrefix + "  L--", childrenPrefix + "  |   ", node->left);
 			}
 			else {
-				print(childrenPrefix + "  |--", childrenPrefix + "      ", node->left);
+				print(childrenPrefix + "  L--", childrenPrefix + "      ", node->left);
 			}
 		}
 		if (node->right != nullptr) {
-			print(childrenPrefix + "  \\--", childrenPrefix + "      ",node->right);
+			print(childrenPrefix + "  P--", childrenPrefix + "      ",node->right);
 		}
 	}
 }
