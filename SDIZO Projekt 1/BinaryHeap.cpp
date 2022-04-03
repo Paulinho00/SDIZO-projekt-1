@@ -92,11 +92,11 @@ void BinaryHeap::findElement(int value) {
 			if (i != 0) cout << (dynArray->getArray())[(i - 1) / 2] << "\n";
 			else cout << "Brak\n";
 			//Wyswietlenie informacji o lewym nastepniku
-			cout << "   Lewy nastepnik: ";
+			cout << "   Lewe dziecko: ";
 			if ((2 * i + 1) < dynArray->getSize()) cout << (dynArray->getArray())[2 * i + 1] << "\n";
 			else cout << "Brak\n";
 			//Wyswietleie informacji o prawym nastepniku
-			cout << "   Prawy nastepnik: ";
+			cout << "   Prawe dziecko: ";
 			if ((2 * i + 2) < dynArray->getSize()) cout << (dynArray->getArray())[2 * i + 2] << "\n";
 			else cout << "Brak\n";
 			cout << "\n";

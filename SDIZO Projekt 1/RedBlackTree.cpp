@@ -102,11 +102,11 @@ void RedBlackTree::findElement(int value) {
 		if (element != root) cout << element->parent->key << endl;
 		else cout << "Brak\n";
 		//Wyswietlenie informacji o lewym nastepniku
-		cout << "Lewy nastepnik: ";
+		cout << "Lewe dziecko: ";
 		if (element->left != nullptr) cout << element->left->key << endl;
 		else cout << "Brak\n";
 		//Wyswietleie informacji o prawym nastepniku
-		cout << "Prawy nastepnik : ";
+		cout << "Prawe dziecko: ";
 		if (element->right != nullptr) cout << element->right->key << endl;
 		else cout << "Brak\n";
 		cout << endl;
